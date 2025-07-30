@@ -75,9 +75,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": getenv("DB_NAME", "crm_system"),
+        "USER": getenv("DB_USER", "web_app"),
+        "PASSWORD": getenv("DB_PASSWORD", "5966952900ae"),
+        "HOST": getenv("DB_HOST", "localhost"),
+        "PORT": getenv("DB_PORT", 5432),
     }
 }
 
