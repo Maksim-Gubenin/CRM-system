@@ -1,42 +1,51 @@
-name: Django CI Pipeline
+name: CI
 
 on:
   push:
-    branches: [dev, test-ci]
+    branches: [ "main", "dev", "test-ci" ]
   pull_request:
-    branches: [main]
+    branches: [ "main", "dev", "test-ci" ]
 
 jobs:
-  lint-and-test:
+  lint:
+    name: Lint and type check
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v4
 
-      - name: Debug - Show directory structure
-        run: ls -la
-
       - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: "3.12"
 
       - name: Install Poetry
-        run: pip install poetry==1.8.2
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
         run: |
-          poetry install --with dev --no-interaction
-          poetry run pip install psycopg2-binary
+          poetry install --no-interaction --no-root --with dev
+          
+      - name: Run Black
+        run: poetry run black --check .
 
-      - name: Run linters
-        run: |
-          poetry run black --check .
-          poetry run isort --check .
-          poetry run flake8 .
-          poetry run pylint crm/
-          poetry run mypy .
+      - name: Run isort
+        run: poetry run isort --check .
 
-      - name: Run Django tests
-        run: |
-          poetry run python manage.py test
+      - name: Run Flake8
+        run: poetry run flake8 .
+
+      - name: Run Pylint
+        run: poetry run pylint --recursive=y crm config
+
+      - name: Run MyPy
+        run: poetry run mypy .
