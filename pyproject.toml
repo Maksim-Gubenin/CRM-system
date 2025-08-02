@@ -16,3 +16,82 @@ dependencies = [
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.3.7"
+black = "^25.1.0"
+isort = "^6.0.1"
+flake8 = "^7.3.0"
+mypy = "^1.17.1"
+flake8-pyproject = "^1.2.3"
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.venv
+    | migrations
+    | \.git
+    | __pycache__
+    | \.mypy_cache
+)/
+'''
+[tool.isort]
+profile = "black"
+line_length = 88
+skip = [".venv", "migrations"]
+known_third_party = ["django", "psycopg", "pytest"]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = "E203, W503"
+exclude = ".venv, migrations, __pycache__, .git"
+per-file-ignores = """
+    __init__.py: F401
+    tests/*: S101
+    */settings.py: F405
+"""
+
+[tool.pylint.master]
+ignore-paths = ".*/migrations/.*,.*/settings.py,.*/manage.py,.*/apps.py"
+load-plugins = "pylint_django"
+
+[tool.pylint.messages_control]
+disable = """
+    raw-checker-failed,
+    bad-inline-option,
+    locally-disabled,
+    file-ignored,
+    suppressed-message,
+    useless-suppression,
+    deprecated-pragma,
+    use-implicit-booleaness-not-comparison-to-string,
+    use-implicit-booleaness-not-comparison-to-zero,
+    use-symbolic-message-instead,
+    missing-module-docstring,
+    too-many-ancestors,
+    missing-class-docstring,
+    missing-function-docstring,
+    invalid-name,
+    duplicate-code,
+    consider-using-f-string,
+    logging-fstring-interpolation
+"""
+
+[tool.pylint.format]
+max-line-length = 88
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+ignore_missing_imports = true
+exclude = ".venv/|migrations/|tests/"
