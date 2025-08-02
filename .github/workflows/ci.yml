@@ -1,0 +1,49 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ dev, test-ci ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Debug - Show structure
+        run: |
+          ls -la
+          ls -la crm-system-0KBx_3GH-py3.12/
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        run: pip install poetry==1.8.2
+
+      - name: Install dependencies
+        run: |
+          cd crm-system-0KBx_3GH-py3.12
+          poetry install --with dev --no-interaction
+
+      - name: Run linters
+        run: |
+          cd crm-system-0KBx_3GH-py3.12
+          poetry run black --check .
+          poetry run isort --check .
+          poetry run flake8 .
+          poetry run pylint crm/
+          poetry run mypy .
+
+      - name: Run Django tests
+        run: |
+          cd crm-system-0KBx_3GH-py3.12
+          poetry run python manage.py test
