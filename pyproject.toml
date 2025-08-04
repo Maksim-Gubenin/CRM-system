@@ -58,8 +58,26 @@ per-file-ignores = """
     */settings.py: F405
 """
 
+[tool.pylint.django]
+django-settings-module = "config.settings"
+
 [tool.pylint.master]
-ignore-paths = ".*/migrations/.*,.*/settings.py,.*/manage.py,.*/apps.py"
+ignore-paths = [
+    "./manage.py",
+    ".*/migrations/.*",
+    ".*/settings.py",
+    ".*/manage.py",
+    ".*/apps.py",
+    "^.venv/",
+    "^.idea/",
+    "^.vscode/",
+    "^__pycache__/",
+    "^node_modules/",
+    "^static/",
+    "^media/",
+    "^dist/",
+    "^build/"
+]
 load-plugins = "pylint_django"
 
 [tool.pylint.messages_control]
