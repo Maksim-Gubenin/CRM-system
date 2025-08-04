@@ -45,7 +45,7 @@ jobs:
         run: poetry run flake8 .
 
       - name: Run Pylint
-        run: poetry run pylint --recursive=y crm config
+        run: poetry run pylint --recursive=y .
 
       - name: Run MyPy
         run: poetry run mypy .
