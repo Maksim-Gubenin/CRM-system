@@ -41,6 +41,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "crm.apps.CrmConfig",
+    "leads.apps.LeadsConfig",
+    "advertisements.apps.AdvertisementsConfig",
+    "products.apps.ProductsConfig",
+    "customers.apps.CustomersConfig",
+    "contracts.apps.ContractsConfig",
 ]
 
 MIDDLEWARE = [
@@ -86,6 +91,9 @@ DATABASES = {
         "PORT": getenv("DB_PORT", 5432),
     }
 }
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 
 # Password validation
