@@ -1,5 +1,6 @@
 from typing import Any, Type
 
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import QuerySet
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -14,7 +15,7 @@ from products.forms import ProductForm
 from products.models import Product
 
 
-class ProductsListView(ListView):
+class ProductsListView(PermissionRequiredMixin, ListView):
     """
     Displays a paginated list of active products.
 
@@ -28,6 +29,7 @@ class ProductsListView(ListView):
             only active products
     """
 
+    permission_required = "products.view_product"
     template_name: str = "products/products-list.html"
     model: Type[Product] = Product
     paginate_by: int = 20
@@ -35,7 +37,7 @@ class ProductsListView(ListView):
     queryset = Product.objects.filter(is_active=True)
 
 
-class ProductsDetailView(DetailView):
+class ProductsDetailView(PermissionRequiredMixin, DetailView):
     """
     Displays detailed information about a single active product.
 
@@ -44,6 +46,7 @@ class ProductsDetailView(DetailView):
         template_name (str): Path to the template used for rendering
     """
 
+    permission_required = "products.view_product"
     model: Type[Product] = Product
     template_name: str = "products/products-detail.html"
 
@@ -51,7 +54,7 @@ class ProductsDetailView(DetailView):
         return super().get_queryset().filter(is_active=True)
 
 
-class ProductsUpdateView(UpdateView):
+class ProductsUpdateView(PermissionRequiredMixin, UpdateView):
     """
     Handles editing of an existing active product.
 
@@ -61,6 +64,7 @@ class ProductsUpdateView(UpdateView):
         form_class (Type[ProductForm]): Form class used for editing
     """
 
+    permission_required = "products.change_product"
     model: Type[Product] = Product
     template_name: str = "products/products-update.html"
     form_class: Type[ProductForm] = ProductForm
@@ -74,7 +78,7 @@ class ProductsUpdateView(UpdateView):
         return self.object.get_absolute_url()
 
 
-class ProductsCreateView(CreateView):
+class ProductsCreateView(PermissionRequiredMixin, CreateView):
     """
     Handles creation of new products.
 
@@ -85,13 +89,14 @@ class ProductsCreateView(CreateView):
         success_url (str): URL to redirect to after successful creation
     """
 
+    permission_required = "products.add_product"
     model: Type[Product] = Product
     template_name: str = "products/products-create.html"
     form_class: Type[ProductForm] = ProductForm
     success_url: str = reverse_lazy("products:list")
 
 
-class ProductsDeleteView(DeleteView):
+class ProductsDeleteView(PermissionRequiredMixin, DeleteView):
     """
     Handles deletion of active products.
 
@@ -101,6 +106,7 @@ class ProductsDeleteView(DeleteView):
         success_url (str): URL to redirect to after successful deletion
     """
 
+    permission_required = "products.delete_product"
     model: Type[Product] = Product
     template_name: str = "products/products-delete.html"
     success_url: str = reverse_lazy("products:list")
