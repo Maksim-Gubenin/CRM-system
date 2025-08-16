@@ -40,3 +40,14 @@ body {
     float: left;
     font-size: 9rem;
 }
+
+
+.card-text {
+    white-space: pre-wrap;
+    max-width: 100%;
+}
+.product-card {
+    max-width: 100%;
+    overflow: hidden;
+}
+

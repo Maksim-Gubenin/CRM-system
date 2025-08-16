@@ -1,6 +1,6 @@
-{% load static %}
+{% load static i18n %}
 
-<html lang="ru">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>CRM</title>
+    <style>
+        .language-selector {
+            margin: 15px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background-color: #f8f9fa;
+            cursor: pointer;
+        }
+        .language-selector:hover {
+            background-color: #e9ecef;
+        }
+    </style>
 </head>
 <body>
 
@@ -16,41 +29,58 @@
         <div class="header-box px-3 pt-4 pb-4">
             <h1 class="fs-4 nav-logo">
                 <span class="text-black text-uppercase font-weight-bold">
-                    <a class="link-dark text-decoration-none" href="/">CRM BACKOFFICE</a>
+                    <a class="link-dark text-decoration-none" href="/">{% trans "CRM BACKOFFICE" %}</a>
                 </span>
             </h1>
         </div>
         <ul class="list-unstyled px-2">
             {% if perms.products.view_product %}
             <li><a href="/products/" class="bar-item text-decoration-none px-3 py-3 d-block">
-                <span><i class="fas fa-microchip"></i></span><span class="ml-1"> Услуги</span>
+                <span><i class="fas fa-microchip"></i></span><span class="ml-1">{% trans "Services" %}</span>
             </a></li>
             {% endif %}
             {% if perms.advertisements.view_advertisement %}
             <li><a href="/ads/" class="bar-item text-decoration-none px-3 py-3 d-block">
-                <span><i class="fas fa-ad"></i></span><span class="ml-1"> Рекламные компании</span>
+                <span><i class="fas fa-ad"></i></span><span class="ml-1">{% trans "Advertising campaigns" %}</span>
             </a></li>
             {% endif %}
             {% if perms.leads.view_lead %}
             <li><a href="/leads/" class="bar-item text-decoration-none px-3 py-3 d-block">
-                <span><i class="fas fa-user-clock"></i></span><span class="px-1"> Лиды</span>
+                <span><i class="fas fa-user-clock"></i></span><span class="px-1">{% trans "Leads" %}</span>
             </a></li>
             {% endif %}
             {% if perms.contracts.view_contract %}
             <li><a href="/contracts/" class="bar-item text-decoration-none px-3 py-3 d-block">
-                <span><i class="fas fa-file-alt"></i></span><span class="px-1"> Контракты</span>
+                <span><i class="fas fa-file-alt"></i></span><span class="px-1">{% trans "Contracts" %}</span>
             </a></li>
             {% endif %}
             {% if perms.customers.view_customer %}
             <li><a href="/customers/" class="bar-item text-decoration-none px-3 py-3 d-block">
-                <span><i class="fas fa-user-check"></i></span><span class="px-1"> Активные клиенты</span>
+                <span><i class="fas fa-user-check"></i></span><span class="px-1">{% trans "Customers" %}</span>
             </a></li>
             {% endif %}
+
             <li>
                 <hr>
+                <form action="{% url 'set_language' %}" method="post" class="px-3 py-2">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                    <select name="language" class="form-select form-select-sm" onchange="this.form.submit()">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                            {{ language.name_local }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </form>
+                <hr>
             </li>
+
             <li><a href="/accounts/logout" class="bar-item text-decoration-none px-3 py-3 d-block">
-                <span><i class="fas fa-sign-out-alt"></i></span><span class="px-1"> Выход</span>
+                <span><i class="fas fa-sign-out-alt"></i></span><span class="px-1">{% trans "Logout" %}</span>
             </a></li>
         </ul>
     </div>

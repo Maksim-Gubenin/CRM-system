@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from products.models import Product
 
@@ -18,8 +19,16 @@ class ProductForm(forms.ModelForm):
         """
 
         model = Product
-        fields = (
-            "name",
-            "description",
-            "cost",
-        )
+        fields = ("name", "description", "cost")
+
+        labels = {
+            "name": _("Name"),
+            "description": _("Description"),
+            "cos": _("Price"),
+        }
+
+        help_texts = {
+            "name": _("Enter the product/service name"),
+            "description": _("Enter detailed description"),
+            "cost": _("Enter price in USD"),
+        }
