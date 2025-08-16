@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
+from django.utils.translation import activate
 from django.utils.translation import gettext as _
 
 from crm.utils import ProductFactory
@@ -69,7 +70,9 @@ class ProductModelTest(TestCase):
     def test_get_absolute_url(self) -> None:
         """Test get_absolute_url method."""
         url = self.product.get_absolute_url()
-        self.assertEqual(url, f"/products/{self.product.pk}/")
+        self.assertTrue(url.endswith(f"/products/{self.product.pk}/"))
+        activate("en-us")
+        self.assertEqual(url, f"/en-us/products/{self.product.pk}/")
 
     def test_cost_validation(self) -> None:
         """Test cost field validation."""

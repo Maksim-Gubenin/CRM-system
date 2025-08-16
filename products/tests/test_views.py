@@ -2,7 +2,7 @@ from decimal import Decimal
 from typing import Any, Dict
 
 from django.contrib.auth import get_user_model
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from crm.utils import ProductFactory, UserFactory
@@ -219,6 +219,7 @@ class ProductsUpdateViewTest(TestCase):
         )
 
 
+@override_settings(USE_I18N=False)
 class ProductsDeleteViewTest(TestCase):
     """Tests for ProductsDeleteView functionality."""
 
@@ -232,7 +233,7 @@ class ProductsDeleteViewTest(TestCase):
 
     def test_view_url_exists(self) -> None:
         """Test that view URL is accessible."""
-        response = self.client.delete(
+        response = self.client.get(
             reverse("products:delete", kwargs={"pk": self.product_active.pk})
         )
         self.assertEqual(response.status_code, 302)
@@ -240,17 +241,16 @@ class ProductsDeleteViewTest(TestCase):
     def test_view_with_permission(self) -> None:
         """Test view access with proper permissions."""
         self.client.force_login(self.superuser)
-        response = self.client.delete(
+        response = self.client.post(
             reverse("products:delete", kwargs={"pk": self.product_active.pk})
         )
         self.assertEqual(response.status_code, 302)
-        # Verify redirect location
         self.assertRedirects(response, reverse("products:list"))
 
     def test_view_without_permission(self) -> None:
         """Test view access without permissions."""
         self.client.force_login(self.user)
-        response = self.client.delete(
+        response = self.client.post(
             reverse("products:delete", kwargs={"pk": self.product_active.pk})
         )
         self.assertEqual(response.status_code, 403)
@@ -258,10 +258,10 @@ class ProductsDeleteViewTest(TestCase):
     def test_only_active_products(self) -> None:
         """Test that only active products can be deleted."""
         self.client.force_login(self.superuser)
-        response_active = self.client.delete(
+        response_active = self.client.post(
             reverse("products:delete", kwargs={"pk": self.product_active.pk})
         )
-        response_inactive = self.client.delete(
+        response_inactive = self.client.post(
             reverse("products:delete", kwargs={"pk": self.product_not_active.pk})
         )
         self.assertEqual(response_active.status_code, 302)
@@ -270,8 +270,14 @@ class ProductsDeleteViewTest(TestCase):
     def test_delete_products(self) -> None:
         """Test successful product deletion."""
         self.client.force_login(self.superuser)
-        response = self.client.delete(
+
+        # Проверяем, что продукт существует до удаления
+        self.assertTrue(Product.objects.filter(pk=self.product_active.pk).exists())
+
+        response = self.client.post(
             reverse("products:delete", kwargs={"pk": self.product_active.pk})
         )
+
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("products:list"))
         self.assertFalse(Product.objects.filter(pk=self.product_active.pk).exists())
