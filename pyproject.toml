@@ -26,6 +26,8 @@ flake8 = "^7.3.0"
 mypy = "^1.17.1"
 flake8-pyproject = "^1.2.3"
 factory-boy = "^3.3.3"
+coverage = "^7.10.3"
+django-coverage-plugin = "^3.1.1"
 
 [tool.black]
 line-length = 88
@@ -106,6 +108,10 @@ disable = """
 
 [tool.pylint.format]
 max-line-length = 88
+disable = """
+    no-name-in-module,
+    import-error
+"""
 
 [tool.mypy]
 python_version = "3.12"
@@ -115,3 +121,48 @@ disallow_untyped_defs = true
 check_untyped_defs = true
 ignore_missing_imports = true
 exclude = ".venv/|migrations/|tests/"
+
+[tool.coverage.run]
+source = [
+    "crm",
+    "products",
+    "customers",
+    "contracts",
+    "leads",
+    "advertisements",
+]
+
+branch = true
+omit = [
+    "**/migrations/**",
+    "**/tests/**",
+    "**/settings.py",
+    "**/urls.py",
+    "**/wsgi.py",
+    "**/asgi.py",
+    "**/manage.py",
+    "**/__init__.py",
+    "**/admin.py",
+    "**/apps.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "pass",
+]
+omit = [
+    "*/tests/*",
+]
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.threshold]
+fail_under = 80
+
