@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-16 10:33+0000\n"
+"POT-Creation-Date: 2025-08-19 04:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,30 +19,30 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-#: _base.html:32
+#: _base.html:33
 msgid "CRM BACKOFFICE"
-msgstr "Административная панель CRM"
+msgstr "CRM АДМИНИСТРАТИВНАЯ ПАНЕЛЬ"
 
-#: _base.html:39
+#: _base.html:40
 msgid "Services"
 msgstr "Услуги"
 
-#: _base.html:44
+#: _base.html:45
 msgid "Advertising campaigns"
 msgstr "Рекламные компании"
 
-#: _base.html:49
+#: _base.html:50
 msgid "Leads"
-msgstr "Потенциальные пользователи"
+msgstr "Лиды"
 
-#: _base.html:54
+#: _base.html:55
 msgid "Contracts"
 msgstr "Контракты"
 
-#: _base.html:59
+#: _base.html:60
 msgid "Customers"
-msgstr "Активные пользователи"
+msgstr "Активные клиенты"
 
-#: _base.html:83
+#: _base.html:84
 msgid "Logout"
 msgstr "Выход"

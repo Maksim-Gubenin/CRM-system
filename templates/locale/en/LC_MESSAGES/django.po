@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-16 10:33+0000\n"
+"POT-Creation-Date: 2025-08-19 04:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,30 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: _base.html:32
+#: _base.html:33
 msgid "CRM BACKOFFICE"
 msgstr "CRM BACKOFFICE"
 
-#: _base.html:39
+#: _base.html:40
 msgid "Services"
 msgstr "Services"
 
-#: _base.html:44
+#: _base.html:45
 msgid "Advertising campaigns"
 msgstr "Advertising campaigns"
 
-#: _base.html:49
+#: _base.html:50
 msgid "Leads"
 msgstr "Leads"
 
-#: _base.html:54
+#: _base.html:55
 msgid "Contracts"
 msgstr "Contracts"
 
-#: _base.html:59
+#: _base.html:60
 msgid "Customers"
 msgstr "Customers"
 
-#: _base.html:83
+#: _base.html:84
 msgid "Logout"
 msgstr "Logout"
