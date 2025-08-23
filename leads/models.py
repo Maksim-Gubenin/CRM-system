@@ -66,9 +66,7 @@ class Lead(BaseModel):
     )
     advertisement = models.ForeignKey(
         "advertisements.Advertisement",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+        on_delete=models.PROTECT,
         related_name="leads",
         verbose_name=_("Advertisement"),
         help_text=_("Related advertisement campaign (optional)"),
