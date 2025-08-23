@@ -152,4 +152,4 @@ class Advertisement(BaseModel):
 
     def get_absolute_url(self) -> Any:
         """Returns the absolute URL of the object."""
-        return reverse("advertisements_detail", kwargs={"pk": self.pk})
+        return reverse("advertisements:detail", kwargs={"pk": self.pk})
