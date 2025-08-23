@@ -141,6 +141,7 @@ LANGUAGES = [
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, "templates", "locale"),
     os.path.join(BASE_DIR, "products", "locale"),
+    os.path.join(BASE_DIR, "advertisements", "locale"),
 ]
 
 TIME_ZONE = "UTC"
