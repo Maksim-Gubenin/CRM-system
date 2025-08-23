@@ -1,0 +1,135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#: forms.py:39 forms.py:40 forms.py:42 forms.py:43
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-23 07:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: forms.py:30 models.py:40
+msgid "First name"
+msgstr "First name"
+
+#: forms.py:31 models.py:45
+msgid "Last name"
+msgstr "Last name"
+
+#: forms.py:32 models.py:52
+msgid "Middle name"
+msgstr "Middle name"
+
+#: forms.py:33 models.py:58
+msgid "Phone number"
+msgstr "Phone number"
+
+#: forms.py:34
+msgid "Email address"
+msgstr "Email address"
+
+#: forms.py:35
+msgid "Advertisement campaign"
+msgstr "Advertisement campaign"
+
+#: forms.py:41
+msgid "(optional)"
+msgstr "(optional)"
+
+#: forms.py:44
+msgid "Select related advertisement campaign"
+msgstr "Select related advertisement campaign"
+
+#: models.py:29
+msgid "Lead"
+msgstr "Lead"
+
+#: models.py:30 templates/leads/leads-list.html:5
+msgid "Leads"
+msgstr "Leads"
+
+#: models.py:41
+msgid "The lead's first name (max 100 characters)"
+msgstr "The lead's first name (max 100 characters)"
+
+#: models.py:46
+msgid "The lead's last name (max 100 characters)"
+msgstr "The lead's last name (max 100 characters"
+
+#: models.py:53
+msgid "The lead's middle name (optional, max 100 characters)"
+msgstr "The lead's middle name (optional, max 100 characters)"
+
+#: models.py:59
+msgid "Contact phone number (max 20 characters)"
+msgstr "Contact phone number (max 20 characters)"
+
+#: models.py:64
+msgid "Email"
+msgstr "Email"
+
+#: models.py:65
+msgid "Valid email address"
+msgstr "Valid email address"
+
+#: models.py:71
+msgid "Advertisement"
+msgstr "Advertisement"
+
+#: models.py:72
+msgid "Related advertisement campaign"
+msgstr "Related advertisement campaign"
+
+#: templates/leads/leads-create.html:5
+msgid "Lead creating"
+msgstr "Lead creating"
+
+#: templates/leads/leads-create.html:12 templates/leads/leads-list.html:8
+msgid "Create"
+msgstr "Create"
+
+#: templates/leads/leads-delete.html:5
+msgid "Lead removal"
+msgstr "Lead removal"
+
+#: templates/leads/leads-delete.html:9
+msgid "Are you sure you want to delete "
+msgstr "Are you sure you want to delete "
+
+#: templates/leads/leads-delete.html:13 templates/leads/leads-list.html:15
+msgid "Delete"
+msgstr "Delete"
+
+#: templates/leads/leads-delete.html:14
+msgid "Cancel"
+msgstr "Cancel"
+
+#: templates/leads/leads-detail.html:5
+msgid "Lead detail information"
+msgstr "Lead detail information"
+
+#: templates/leads/leads-detail.html:17
+msgid "Edit"
+msgstr "Edit"
+
+#: templates/leads/leads-detail.html:18
+msgid "Back to list"
+msgstr "Back to list"
+
+#: templates/leads/leads-update.html:5
+msgid "Lead editing"
+msgstr "Lead editing"
+
+#: templates/leads/leads-update.html:12
+msgid "Apply"
+msgstr "Apply"

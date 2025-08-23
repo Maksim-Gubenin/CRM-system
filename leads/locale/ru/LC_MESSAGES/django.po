@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#: forms.py:39 forms.py:40 forms.py:42 forms.py:43
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-23 07:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+#: forms.py:30 models.py:40
+msgid "First name"
+msgstr "Имя"
+
+#: forms.py:31 models.py:45
+msgid "Last name"
+msgstr "Фамилия"
+
+#: forms.py:32 models.py:52
+msgid "Middle name"
+msgstr "Отчество"
+
+#: forms.py:33 models.py:58
+msgid "Phone number"
+msgstr "Номер телефона"
+
+#: forms.py:34
+msgid "Email address"
+msgstr "Адрес электронной почты"
+
+#: forms.py:35
+msgid "Advertisement campaign"
+msgstr "Рекламная компания"
+
+#: forms.py:41
+msgid "(optional)"
+msgstr "(необязательное поле)"
+
+#: forms.py:44
+msgid "Select related advertisement campaign"
+msgstr "Выберите соответствующую рекламную кампанию"
+
+#: models.py:29
+msgid "Lead"
+msgstr "Лид"
+
+#: models.py:30 templates/leads/leads-list.html:5
+msgid "Leads"
+msgstr "Лиды"
+
+#: models.py:41
+msgid "The lead's first name (max 100 characters)"
+msgstr "Имя лида (макс. 100 символов)"
+
+#: models.py:46
+msgid "The lead's last name (max 100 characters)"
+msgstr "Фамилия лида (максимум 100 символов)"
+
+#: models.py:53
+msgid "The lead's middle name (optional, max 100 characters)"
+msgstr "Отчество лида (необязательно, максимум 100 символов)"
+
+#: models.py:59
+msgid "Contact phone number (max 20 characters)"
+msgstr "Контактный номер телефона (макс. 20 символов)"
+
+#: models.py:64
+msgid "Email"
+msgstr "Электронная почта"
+
+#: models.py:65
+msgid "Valid email address"
+msgstr "Действующий электронный адрес"
+
+#: models.py:71
+msgid "Advertisement"
+msgstr "Рекламная компания"
+
+#: models.py:72
+msgid "Related advertisement campaign"
+msgstr "Соответствующая рекламная компания"
+
+#: templates/leads/leads-create.html:5
+msgid "Lead creating"
+msgstr "Создание лида"
+
+#: templates/leads/leads-create.html:12 templates/leads/leads-list.html:8
+msgid "Create"
+msgstr "Создать"
+
+#: templates/leads/leads-delete.html:5
+msgid "Lead removal"
+msgstr "Удаление лида"
+
+#: templates/leads/leads-delete.html:9
+msgid "Are you sure you want to delete "
+msgstr "Вы уверены, что хотите удалить "
+
+#: templates/leads/leads-delete.html:13 templates/leads/leads-list.html:15
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/leads/leads-delete.html:14
+msgid "Cancel"
+msgstr "Отмена"
+
+#: templates/leads/leads-detail.html:5
+msgid "Lead detail information"
+msgstr "Детальная информация о лиде"
+
+#: templates/leads/leads-detail.html:17
+msgid "Edit"
+msgstr "Редактировать"
+
+#: templates/leads/leads-detail.html:18
+msgid "Back to list"
+msgstr "Назад к списку"
+
+#: templates/leads/leads-update.html:5
+msgid "Lead editing"
+msgstr "Редактирование лида"
+
+#: templates/leads/leads-update.html:12
+msgid "Apply"
+msgstr "Принять"
