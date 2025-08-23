@@ -119,7 +119,7 @@ msgstr "у.е."
 
 #: templates/products/products-detail.html:18
 msgid "Edit"
-msgstr "Изменить"
+msgstr "Редактировать"
 
 #: templates/products/products-detail.html:19
 msgid "Back to list"
