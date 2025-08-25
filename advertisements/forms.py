@@ -1,3 +1,5 @@
+from typing import Any
+
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
@@ -25,7 +27,12 @@ class ADSForm(forms.ModelForm):
         """
 
         model = Advertisement
-        fields = ("name", "channel", "cost", "product",)
+        fields = (
+            "name",
+            "channel",
+            "cost",
+            "product",
+        )
 
         labels = {
             "name": _("Name"),
@@ -40,10 +47,11 @@ class ADSForm(forms.ModelForm):
             "cost": _("Enter price in USD"),
             "product": _("Select a product/service for an advertising campaign"),
         }
-    
-    def __init__(self, *args, **kwargs):
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """
         Initialize form with filtered product queryset.
         """
+
         super().__init__(*args, **kwargs)
-        self.fields['product'].queryset = Product.objects.filter(is_active=True)
+        self.fields["product"].queryset = Product.objects.filter(is_active=True)
