@@ -66,8 +66,7 @@ msgstr "Социальные сети"
 
 #: models.py:51
 msgid "Search Engines"
-msgstr "Поисковые системы
-"
+msgstr "Поисковые системы"
 
 #: models.py:52
 msgid "Context Ads"
@@ -203,8 +202,7 @@ msgstr "Соотношение контракта и стоимости"
 
 #: templates/advertisements/ads-update.html:5
 msgid "Editing an advertising campaign"
-msgstr "
-Редактирование рекламной кампании"
+msgstr "Редактирование рекламной кампании"
 
 #: templates/advertisements/ads-update.html:12
 msgid "Apply"

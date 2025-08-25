@@ -2,6 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from advertisements.models import Advertisement
+from products.models import Product
 
 
 class ADSForm(forms.ModelForm):
@@ -24,7 +25,7 @@ class ADSForm(forms.ModelForm):
         """
 
         model = Advertisement
-        fields = ("name", "channel", "cost", "product")
+        fields = ("name", "channel", "cost", "product",)
 
         labels = {
             "name": _("Name"),
@@ -39,3 +40,10 @@ class ADSForm(forms.ModelForm):
             "cost": _("Enter price in USD"),
             "product": _("Select a product/service for an advertising campaign"),
         }
+    
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize form with filtered product queryset.
+        """
+        super().__init__(*args, **kwargs)
+        self.fields['product'].queryset = Product.objects.filter(is_active=True)
