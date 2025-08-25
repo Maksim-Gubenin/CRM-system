@@ -15,7 +15,6 @@ class Contract(BaseModel):
     Attributes:
         name (str): Contract name/identifier. Max length 255 chars.
         product (Product): Service/product covered by contract (FK to Product).
-        customer (Customer): Customer who signed the contract (FK to Customer).
         document (File): Scanned contract document (PDF or Word).
         start_date (date): Service start date.
         end_date (date): Service end date.
@@ -46,14 +45,6 @@ class Contract(BaseModel):
         help_text=_("Service/product covered by this contract"),
     )
 
-    customer = models.ForeignKey(
-        "customers.Customer",
-        on_delete=models.PROTECT,
-        related_name="contracts",
-        db_index=True,
-        verbose_name=_("Customer"),
-        help_text=_("Customer covered by this contract"),
-    )
 
     document = models.FileField(
         upload_to="contracts/%Y/%m/",
