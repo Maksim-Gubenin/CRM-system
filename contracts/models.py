@@ -45,7 +45,6 @@ class Contract(BaseModel):
         help_text=_("Service/product covered by this contract"),
     )
 
-
     document = models.FileField(
         upload_to="contracts/%Y/%m/",
         validators=[

@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.contrib import admin
 from django.http import HttpRequest
 
@@ -9,18 +11,15 @@ class ContractAdmin(admin.ModelAdmin):
     """
     Admin interface configuration for Contract model.
 
-    Provides management interface for contracts with list display,
-    filtering, search functionality, and organized field grouping.
+    Features:
+    - List display with contract details and key information
+    - Filtering by dates, product, and creation time
+    - Search functionality across contract names and products
+    - Organized field grouping in edit forms
+    - Automatic readonly fields management for timestamps
     """
 
-    list_display = (
-        "name",
-        "product",
-        "start_date",
-        "end_date",
-        "cost",
-        "created_at"
-    )
+    list_display = ("name", "product", "start_date", "end_date", "cost", "created_at")
 
     list_filter = (
         "start_date",
@@ -51,16 +50,8 @@ class ContractAdmin(admin.ModelAdmin):
             )
         }),
         ("Document", {
-            "fields": (
-                "document",
-            )
+            "fields": ("document",)
         }),
     )
 
-    def get_readonly_fields(self, request: HttpRequest, obj: Contract = None) -> tuple:
-        """
-        Return readonly fields based on object state.
-        """
-        if obj:
-            return ("created_at", "updated_at")
-        return ()
+# Register your models here.

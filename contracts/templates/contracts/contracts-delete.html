@@ -2,15 +2,15 @@
 {% load i18n %}
 
 {% block content %}
-<h2 class="fw-bold">Удаление контракта</h2>
+<h2 class="fw-bold">{% trans "Deleting a contract" %}</h2>
 <div class="row bg-white px-3 py-3 mx-2 my-5 rounded pb-5 shadow-lg">
     <div class="col"></div>
     <div class="col">
-        <p>Вы уверены что хотите удалить "{{ object.name }}"?</p>
+        <p>{% trans "Are you sure you want to delete " %} "{{ object.name }}"?</p>
         <form method="POST" action="{% url 'contracts:delete' contract.pk %}">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-danger">Удалить</button>
+            <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
             <a href="{% url 'contracts:detail' object.pk %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
         </form>
     </div>

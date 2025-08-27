@@ -1,6 +1,12 @@
 from django.urls import path
 
-from contracts.views import ContractsListView, ContractsDetailView, ContractsUpdateView, ContractsCreateView, ContractDeleteView
+from contracts.views import (
+    ContractDeleteView,
+    ContractsCreateView,
+    ContractsDetailView,
+    ContractsListView,
+    ContractsUpdateView,
+)
 
 app_name = "contracts"
 
