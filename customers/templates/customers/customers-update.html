@@ -9,7 +9,7 @@
         <form method="POST" action="{% url 'customers:update' object.pk %}">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">{% trans "Edit" %}</button>
+            <button type="submit" class="btn btn-primary">{% trans "Apply" %}</button>
         </form>
     </div>
     <div class="col"></div>
