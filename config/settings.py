@@ -144,6 +144,7 @@ LOCALE_PATHS = [
     os.path.join(BASE_DIR, "leads", "locale"),
     os.path.join(BASE_DIR, "advertisements", "locale"),
     os.path.join(BASE_DIR, "contracts", "locale"),
+    os.path.join(BASE_DIR, "customers", "locale"),
 ]
 
 TIME_ZONE = "UTC"
