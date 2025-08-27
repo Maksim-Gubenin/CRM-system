@@ -54,4 +54,18 @@ class ContractAdmin(admin.ModelAdmin):
         }),
     )
 
-# Register your models here.
+    def get_readonly_fields(self, request: HttpRequest, obj: Optional[Contract] = None) -> Optional[tuple]:
+        """
+        Return readonly fields based on object state.
+
+        Args:
+            request: The current HTTP request
+            obj: The Contract instance being edited (None for new objects)
+
+        Returns:
+            tuple: Readonly fields for the form
+        """
+
+        if obj:
+            return ("created_at", "updated_at")
+        return ()
