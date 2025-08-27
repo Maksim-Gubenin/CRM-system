@@ -33,10 +33,10 @@ class Customer(BaseModel):
         help_text=_("Original lead that became a customer"),
     )
 
-    contract = models.ForeignKey(
+    contract = models.OneToOneField(
         "contracts.Contract",
         on_delete=models.PROTECT,
-        related_name="customers",
+        related_name="customer",
         verbose_name=_("Contract"),
         help_text=_("Active contract for this customer"),
     )
@@ -53,4 +53,4 @@ class Customer(BaseModel):
             str: Absolute URL for customer detail view.
         """
 
-        return reverse("customer:detail", kwargs={"pk": self.pk})
+        return reverse("customers:detail", kwargs={"pk": self.pk})
