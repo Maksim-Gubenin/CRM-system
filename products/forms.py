@@ -24,7 +24,7 @@ class ProductForm(forms.ModelForm):
         labels = {
             "name": _("Name"),
             "description": _("Description"),
-            "cos": _("Price"),
+            "cost": _("Price"),
         }
 
         help_texts = {
