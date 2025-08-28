@@ -46,16 +46,17 @@ class CustomerForm(forms.ModelForm):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """
         Initialize form with filtered querysets for lead and contract fields.
-
-        Filters:
-        - leads: Only leads that are not already converted to customers
-        - contracts: Only contracts that are not already assigned to customers
-
-        Args:
-            *args: Variable length argument list
-            **kwargs: Arbitrary keyword arguments
         """
-
         super().__init__(*args, **kwargs)
-        self.fields["lead"].queryset = Lead.objects.filter(customer=None)
-        self.fields["contract"].queryset = Contract.objects.filter(customer=None)
+
+        current_customer = self.instance if self.instance and self.instance.pk else None
+
+        lead_queryset = Lead.objects.filter(customer=None)
+        if current_customer and current_customer.lead:
+            lead_queryset = lead_queryset | Lead.objects.filter(pk=current_customer.lead.pk)
+        self.fields["lead"].queryset = lead_queryset
+
+        contract_queryset = Contract.objects.filter(customer=None)
+        if current_customer and current_customer.contract:
+            contract_queryset = contract_queryset | Contract.objects.filter(pk=current_customer.contract.pk)
+        self.fields["contract"].queryset = contract_queryset
