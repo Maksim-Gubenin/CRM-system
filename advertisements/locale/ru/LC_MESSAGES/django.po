@@ -206,4 +206,4 @@ msgstr "Редактирование рекламной кампании"
 
 #: templates/advertisements/ads-update.html:12
 msgid "Apply"
-msgstr "Принять"
+msgstr "Применить"

@@ -133,4 +133,4 @@ msgstr "Edit Service"
 
 #: templates/products/products-update.html:12
 msgid "Apply Changes"
-msgstr "Apply Changes"
+msgstr "Apply"

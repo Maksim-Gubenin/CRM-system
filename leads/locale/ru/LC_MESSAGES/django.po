@@ -134,4 +134,4 @@ msgstr "Редактирование лида"
 
 #: templates/leads/leads-update.html:12
 msgid "Apply"
-msgstr "Принять"
+msgstr "Применить"
