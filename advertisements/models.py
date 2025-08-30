@@ -104,7 +104,7 @@ class Advertisement(BaseModel):
 
         return self.leads.count()
 
-    def converted_customers_count(self) -> Any:
+    def customers_count(self) -> Any:
         """Returns number of leads converted to customers.
 
         Returns:
@@ -123,7 +123,7 @@ class Advertisement(BaseModel):
         total_leads = self.leads_count()
         if total_leads == 0:
             return 0.0
-        return round(self.converted_customers_count() / total_leads, 2)
+        return round(self.customers_count() / total_leads, 2)
 
     def profit(self) -> float | None:
         """
@@ -138,7 +138,7 @@ class Advertisement(BaseModel):
             return None
 
         total_income = (
-            Contract.objects.filter(customers__lead__advertisement=self).aggregate(
+            Contract.objects.filter(customer__lead__advertisement=self).aggregate(
                 total_income=Sum("cost")
             )["total_income"]
             or 0

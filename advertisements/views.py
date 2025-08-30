@@ -1,4 +1,4 @@
-from typing import Any, Type
+from typing import Any, Dict, Type
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import QuerySet
@@ -137,4 +137,9 @@ class ADSStatisticsView(PermissionRequiredMixin, TemplateView):
 
     permission_required = "advertisements.view_advertisement_stats"
     template_name = "advertisements/ads-statistic.html"
-    pass
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        """Returns queryset advertisements."""
+        context: dict[str, Any] = super().get_context_data(**kwargs)
+        context["ads"] = ads.objects.all()
+        return context
