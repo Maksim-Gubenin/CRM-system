@@ -79,9 +79,16 @@
                 <hr>
             </li>
 
-            <li><a href="/accounts/logout" class="bar-item text-decoration-none px-3 py-3 d-block">
-                <span><i class="fas fa-sign-out-alt"></i></span><span class="px-1">{% trans "Logout" %}</span>
-            </a></li>
+            <li>
+
+                <form method="post" action="{% url 'logout' %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit"
+                            class="bar-item text-decoration-none px-3 py-3 d-block border-0 bg-transparent w-100 text-start">
+                        <span><i class="fas fa-sign-out-alt"></i></span><span class="px-1">{% trans "Logout" %}</span>
+                    </button>
+                </form>
+            </li>
         </ul>
     </div>
     <div class="content px-3 pt-4">
