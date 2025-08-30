@@ -36,25 +36,31 @@ class ContractAdmin(admin.ModelAdmin):
     list_per_page = 20
 
     fieldsets = (
-        ("Contract Information", {
-            "fields": (
-                "name",
-                "product",
-            )
-        }),
-        ("Dates & Financial", {
-            "fields": (
-                "start_date",
-                "end_date",
-                "cost",
-            )
-        }),
-        ("Document", {
-            "fields": ("document",)
-        }),
+        (
+            "Contract Information",
+            {
+                "fields": (
+                    "name",
+                    "product",
+                )
+            },
+        ),
+        (
+            "Dates & Financial",
+            {
+                "fields": (
+                    "start_date",
+                    "end_date",
+                    "cost",
+                )
+            },
+        ),
+        ("Document", {"fields": ("document",)}),
     )
 
-    def get_readonly_fields(self, request: HttpRequest, obj: Optional[Contract] = None) -> Optional[tuple]:
+    def get_readonly_fields(
+        self, request: HttpRequest, obj: Optional[Contract] = None
+    ) -> Optional[tuple]:
         """
         Return readonly fields based on object state.
 
