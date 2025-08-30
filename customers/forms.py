@@ -39,8 +39,8 @@ class CustomerForm(forms.ModelForm):
         }
 
         help_texts = {
-            "lead": _("Select a lead to convert to customer (only available leads are shown)"),
-            "contract": _("Select a contract for the customer (only available contracts are shown)"),
+            "lead": _("Select a lead (only available leads are shown)"),
+            "contract": _("Select a contract (only available contracts are shown)"),
         }
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
@@ -53,10 +53,14 @@ class CustomerForm(forms.ModelForm):
 
         lead_queryset = Lead.objects.filter(customer=None)
         if current_customer and current_customer.lead:
-            lead_queryset = lead_queryset | Lead.objects.filter(pk=current_customer.lead.pk)
+            lead_queryset = lead_queryset | Lead.objects.filter(
+                pk=current_customer.lead.pk
+            )
         self.fields["lead"].queryset = lead_queryset
 
         contract_queryset = Contract.objects.filter(customer=None)
         if current_customer and current_customer.contract:
-            contract_queryset = contract_queryset | Contract.objects.filter(pk=current_customer.contract.pk)
+            contract_queryset = contract_queryset | Contract.objects.filter(
+                pk=current_customer.contract.pk
+            )
         self.fields["contract"].queryset = contract_queryset
