@@ -34,7 +34,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path("crm/", include("crm.urls")),
+    path("", include("crm.urls")),
     path("leads/", include("leads.urls")),
     path("ads/", include("advertisements.urls")),
     path("products/", include("products.urls")),
