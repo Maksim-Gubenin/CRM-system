@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-27 11:19+0700\n"
+"POT-Creation-Date: 2025-08-30 08:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,121 +20,121 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: .\forms.py:40 .\models.py:37
+#: contracts/forms.py:40 contracts/models.py:37
 msgid "Contract name"
 msgstr "Название договора"
 
-#: .\forms.py:41 .\models.py:44
+#: contracts/forms.py:41 contracts/models.py:44
 msgid "Product"
 msgstr "Услуга"
 
-#: .\forms.py:42 .\models.py:55
+#: contracts/forms.py:42 contracts/models.py:55
 msgid "Document"
 msgstr "Документ"
 
-#: .\forms.py:43 .\models.py:60
+#: contracts/forms.py:43 contracts/models.py:60
 msgid "Start date"
 msgstr "Дата начала"
 
-#: .\forms.py:44 .\models.py:65
+#: contracts/forms.py:44 contracts/models.py:65
 msgid "End date"
 msgstr "Дата завершения"
 
-#: .\forms.py:45 .\models.py:75
+#: contracts/forms.py:45 contracts/models.py:75
 msgid "Cost"
 msgstr "Стоимость"
 
-#: .\forms.py:49 .\models.py:38
+#: contracts/forms.py:49 contracts/models.py:38
 msgid "Official contract reference number/name"
 msgstr "Официальный номер/название контракта"
 
-#: .\forms.py:50 .\models.py:45
+#: contracts/forms.py:50 contracts/models.py:45
 msgid "Service/product covered by this contract"
 msgstr ""
 "Услуга/продукт, на которые распространяется действие настоящего контракта"
 
-#: .\forms.py:51 .\models.py:56
+#: contracts/forms.py:51 contracts/models.py:56
 msgid "Scanned contract file (PDF or Word)"
 msgstr "Отсканированный файл контракта (PDF или Word)"
 
-#: .\forms.py:52 .\models.py:61
+#: contracts/forms.py:52 contracts/models.py:61
 msgid "Service start date"
 msgstr "Дата начала обслуживания"
 
-#: .\forms.py:53 .\models.py:66
+#: contracts/forms.py:53 contracts/models.py:66
 msgid "Service end date"
 msgstr "Дата окончания обслуживания"
 
-#: .\forms.py:54 .\models.py:76
+#: contracts/forms.py:54 contracts/models.py:76
 msgid "Total contract value"
 msgstr "Общая стоимость контракта"
 
-#: .\models.py:31
+#: contracts/models.py:31
 msgid "Contract"
 msgstr "Контракт"
 
-#: .\models.py:32 .\templates\contracts\contracts-list.html:5
+#: contracts/models.py:32 contracts/templates/contracts/contracts-list.html:5
 msgid "Contracts"
 msgstr "Контракты"
 
-#: .\models.py:88
+#: contracts/models.py:88
 msgid "End date cannot be earlier than start date"
 msgstr "Дата окончания не может быть раньше даты начала."
 
-#: .\templates\contracts\contracts-create.html:5
+#: contracts/templates/contracts/contracts-create.html:5
 msgid "Creating a contract"
 msgstr "Создание контракта"
 
-#: .\templates\contracts\contracts-create.html:12
-#: .\templates\contracts\contracts-list.html:8
+#: contracts/templates/contracts/contracts-create.html:14
+#: contracts/templates/contracts/contracts-list.html:8
 msgid "Create"
 msgstr "Создать"
 
-#: .\templates\contracts\contracts-delete.html:5
+#: contracts/templates/contracts/contracts-delete.html:5
 msgid "Deleting a contract"
 msgstr "Удаление контракта"
 
-#: .\templates\contracts\contracts-delete.html:9
+#: contracts/templates/contracts/contracts-delete.html:9
 msgid "Are you sure you want to delete "
 msgstr "Вы уверены, что хотите удалить "
 
-#: .\templates\contracts\contracts-delete.html:13
-#: .\templates\contracts\contracts-list.html:15
+#: contracts/templates/contracts/contracts-delete.html:13
+#: contracts/templates/contracts/contracts-list.html:15
 msgid "Delete"
 msgstr "удалить"
 
-#: .\templates\contracts\contracts-delete.html:14
+#: contracts/templates/contracts/contracts-delete.html:14
 msgid "Cancel"
 msgstr "Отмена"
 
-#: .\templates\contracts\contracts-detail.html:5
+#: contracts/templates/contracts/contracts-detail.html:5
 msgid "Detailed information about the contract"
 msgstr "Детальная информация о контракте"
 
-#: .\templates\contracts\contracts-detail.html:12
+#: contracts/templates/contracts/contracts-detail.html:12
 msgid "from"
 msgstr "с"
 
-#: .\templates\contracts\contracts-detail.html:12
+#: contracts/templates/contracts/contracts-detail.html:12
 msgid "to"
 msgstr "по"
 
-#: .\templates\contracts\contracts-detail.html:13
+#: contracts/templates/contracts/contracts-detail.html:13
 msgid "USD"
 msgstr "у.е."
 
-#: .\templates\contracts\contracts-detail.html:15
+#: contracts/templates/contracts/contracts-detail.html:15
 msgid "Edit"
 msgstr "Редактировать"
 
-#: .\templates\contracts\contracts-detail.html:16
+#: contracts/templates/contracts/contracts-detail.html:16
 msgid "Back to list"
 msgstr "Назад к списку"
 
-#: .\templates\contracts\contracts-update.html:5
+#: contracts/templates/contracts/contracts-update.html:5
 msgid "Editing a contract"
 msgstr "Редактирование контракта"
 
-#: .\templates\contracts\contracts-update.html:12
+#: contracts/templates/contracts/contracts-update.html:14
 msgid "Apply"
 msgstr "Применить"

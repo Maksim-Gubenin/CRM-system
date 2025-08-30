@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 09:24+0000\n"
+"POT-Creation-Date: 2025-08-30 08:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,157 +18,159 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:30
+#: advertisements/forms.py:38
 msgid "Name"
 msgstr "Name"
 
-#: forms.py:31
+#: advertisements/forms.py:39
 msgid "Channel"
 msgstr "Channel"
 
-#: forms.py:32
+#: advertisements/forms.py:40
 msgid "Price"
 msgstr "Price"
 
-#: forms.py:33 models.py:82
+#: advertisements/forms.py:41 advertisements/models.py:82
 msgid "Product"
 msgstr "Product"
 
-#: forms.py:37
+#: advertisements/forms.py:45
 msgid "Enter the Advertisement name"
 msgstr "Enter the Advertisement name"
 
-#: forms.py:38
+#: advertisements/forms.py:46
 msgid "Indicate the promotion channel"
 msgstr "Indicate the promotion channel"
 
-#: forms.py:39
+#: advertisements/forms.py:47
 msgid "Enter price in USD"
 msgstr "Enter price in USD"
 
-#: forms.py:40
+#: advertisements/forms.py:48
 msgid "Select a product/service for an advertising campaign"
 msgstr "Select a product/service for an advertising campaign"
 
-#: models.py:35
+#: advertisements/models.py:35
 msgid "Advertisement"
 msgstr "Advertisement"
 
-#: models.py:36
+#: advertisements/models.py:36
 msgid "Advertisements"
 msgstr "Advertisements"
 
-#: models.py:50
+#: advertisements/models.py:50
 msgid "Social Media"
 msgstr "Social Media"
 
-#: models.py:51
+#: advertisements/models.py:51
 msgid "Search Engines"
 msgstr "Search Engines"
 
-#: models.py:52
+#: advertisements/models.py:52
 msgid "Context Ads"
 msgstr "Context Ads"
 
-#: models.py:53
+#: advertisements/models.py:53
 msgid "Email Marketing"
 msgstr "Email Marketing"
 
-#: models.py:54
+#: advertisements/models.py:54
 msgid "Other"
 msgstr "Other"
 
-#: models.py:59
+#: advertisements/models.py:59
 msgid "Campaign name"
 msgstr "Campaign name"
 
-#: models.py:60
+#: advertisements/models.py:60
 msgid "Name of the advertising campaign"
 msgstr "Name of the advertising campaign"
 
-#: models.py:67
+#: advertisements/models.py:67
 msgid "Advertising channel"
 msgstr "Advertising channel"
 
-#: models.py:68
+#: advertisements/models.py:68
 msgid "Primary advertising channel"
 msgstr "Primary advertising channel"
 
-#: models.py:76
+#: advertisements/models.py:76
 msgid "Budget"
 msgstr "Budget"
 
-#: models.py:77
+#: advertisements/models.py:77
 msgid "Total budget for the campaign"
 msgstr "Total budget for the campaig"
 
-#: models.py:83
+#: advertisements/models.py:83
 msgid "Product being advertised"
 msgstr "Product being advertised"
 
-#: models.py:88
+#: advertisements/models.py:88
 msgid "Active"
 msgstr "Active"
 
-#: models.py:89
+#: advertisements/models.py:89
 msgid "Is campaign currently active"
 msgstr "Is campaign currently active"
 
-#: templates/advertisements/ads-create.html:5
+#: advertisements/templates/advertisements/ads-create.html:5
 msgid "Create advertisement"
 msgstr "Create advertisement"
 
-#: templates/advertisements/ads-create.html:12
-#: templates/advertisements/ads-list.html:8
+#: advertisements/templates/advertisements/ads-create.html:12
+#: advertisements/templates/advertisements/ads-list.html:8
 msgid "Create"
 msgstr "Create"
 
-#: templates/advertisements/ads-delete.html:5
+#: advertisements/templates/advertisements/ads-delete.html:5
 msgid "Delete advertisement"
 msgstr "Delete advertisement"
 
-#: templates/advertisements/ads-delete.html:9
-msgid "Are you sure you want to delete?"
+#: advertisements/templates/advertisements/ads-delete.html:9
+#, fuzzy
+#| msgid "Are you sure you want to delete?"
+msgid "Are you sure you want to delete "
 msgstr "Are you sure you want to delete"
 
-#: templates/advertisements/ads-delete.html:13
-#: templates/advertisements/ads-list.html:16
+#: advertisements/templates/advertisements/ads-delete.html:13
+#: advertisements/templates/advertisements/ads-list.html:16
 msgid "Delete"
 msgstr "Delete"
 
-#: templates/advertisements/ads-delete.html:14
+#: advertisements/templates/advertisements/ads-delete.html:14
 msgid "Cancel"
 msgstr "Cancel"
 
-#: templates/advertisements/ads-detail.html:5
+#: advertisements/templates/advertisements/ads-detail.html:5
 msgid "Detailed information about the advertising campaign"
 msgstr "Detailed information about the advertising campaign"
 
-#: templates/advertisements/ads-detail.html:13
+#: advertisements/templates/advertisements/ads-detail.html:13
 msgid "USD"
 msgstr "USD"
 
-#: templates/advertisements/ads-detail.html:15
+#: advertisements/templates/advertisements/ads-detail.html:15
 msgid "Edit"
 msgstr "Edit"
 
-#: templates/advertisements/ads-detail.html:16
+#: advertisements/templates/advertisements/ads-detail.html:16
 msgid "Back to list"
 msgstr "Back to list"
 
-#: templates/advertisements/ads-list.html:5
+#: advertisements/templates/advertisements/ads-list.html:5
 msgid "Advertising companies"
 msgstr "Advertising companies"
 
-#: templates/advertisements/ads-list.html:9
+#: advertisements/templates/advertisements/ads-list.html:9
 msgid "Statistics"
 msgstr "Statistics"
 
-#: templates/advertisements/ads-statistic.html:5
+#: advertisements/templates/advertisements/ads-statistic.html:5
 msgid "Advertising campaign statistics"
 msgstr "Advertising campaign statistics"
 
-#: templates/advertisements/ads-statistic.html:13
+#: advertisements/templates/advertisements/ads-statistic.html:13
 #, python-format
 msgid ""
 "\n"
@@ -179,9 +181,15 @@ msgid_plural ""
 "                        %(leads_count)s leads\n"
 "                    "
 msgstr[0] ""
+"\n"
+"                        %(leads_count)s lead\n"
+"                    "
 msgstr[1] ""
+"\n"
+"                        %(leads_count)s leads\n"
+"                    "
 
-#: templates/advertisements/ads-statistic.html:19
+#: advertisements/templates/advertisements/ads-statistic.html:19
 #, python-format
 msgid ""
 "\n"
@@ -194,14 +202,14 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/advertisements/ads-statistic.html:25
+#: advertisements/templates/advertisements/ads-statistic.html:25
 msgid "Contract to cost ratio"
 msgstr "Contract to cost ratio"
 
-#: templates/advertisements/ads-update.html:5
+#: advertisements/templates/advertisements/ads-update.html:5
 msgid "Editing an advertising campaign"
 msgstr "Editing an advertising campaign"
 
-#: templates/advertisements/ads-update.html:12
+#: advertisements/templates/advertisements/ads-update.html:12
 msgid "Apply"
 msgstr "Apply"

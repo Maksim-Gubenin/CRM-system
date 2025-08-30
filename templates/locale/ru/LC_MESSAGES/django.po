@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-19 04:16+0000\n"
+"POT-Creation-Date: 2025-08-30 08:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,30 +19,75 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-#: _base.html:33
-msgid "CRM BACKOFFICE"
-msgstr "CRM АДМИНИСТРАТИВНАЯ ПАНЕЛЬ"
 
-#: _base.html:40
+#: config/settings.py:137
+msgid "English"
+msgstr ""
+
+#: config/settings.py:138
+msgid "Russian"
+msgstr ""
+
+#: templates/_base.html:32 templates/login.html:65
+msgid "CRM BACKOFFICE"
+msgstr "CRM ПАНЕЛЬ УПРАВЛЕНИЯ"
+
+#: templates/_base.html:39
 msgid "Services"
 msgstr "Услуги"
 
-#: _base.html:45
+#: templates/_base.html:44
 msgid "Advertising campaigns"
 msgstr "Рекламные компании"
 
-#: _base.html:50
+#: templates/_base.html:49 templates/index.html:33
 msgid "Leads"
 msgstr "Лиды"
 
-#: _base.html:55
+#: templates/_base.html:54
 msgid "Contracts"
 msgstr "Контракты"
 
-#: _base.html:60
+#: templates/_base.html:59 templates/index.html:44
 msgid "Customers"
 msgstr "Активные клиенты"
 
-#: _base.html:84
+#: templates/_base.html:88
 msgid "Logout"
 msgstr "Выход"
+
+#: templates/index.html:5
+msgid "General statistics"
+msgstr "Общая статистика"
+
+#: templates/index.html:11
+msgid "Products"
+msgstr "Услуги"
+
+#: templates/index.html:22
+msgid "Advertisements"
+msgstr "Рекламные компании"
+
+#: templates/login.html:10
+msgid "CRM - Login"
+msgstr "CRM - Авторизация"
+
+#: templates/login.html:73
+msgid ""
+"Please enter a correct username and password. Note that both fields may be "
+"case-sensitive."
+msgstr ""
+"Пожалуйста, введите правильное имя пользователя и пароль. Обратите внимание, "
+"что оба поля могут быть чувствительны к регистру."
+
+#: templates/login.html:78 templates/login.html:80
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: templates/login.html:85 templates/login.html:87
+msgid "Password"
+msgstr "Пароль"
+
+#: templates/login.html:91
+msgid "Sign In"
+msgstr "Войти"

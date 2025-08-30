@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-19 04:19+0000\n"
+"POT-Creation-Date: 2025-08-30 08:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,120 +19,121 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-#: forms.py:25 models.py:40
+
+#: products/forms.py:25 products/models.py:40
 msgid "Name"
 msgstr "Название"
 
-#: forms.py:26 models.py:46
+#: products/forms.py:26 products/models.py:46
 msgid "Description"
 msgstr "Описание"
 
-#: forms.py:27
+#: products/forms.py:27
 msgid "Price"
 msgstr "Стоимость"
 
-#: forms.py:31
+#: products/forms.py:31
 msgid "Enter the product/service name"
 msgstr "Введите название продукта/услуги"
 
-#: forms.py:32
+#: products/forms.py:32
 msgid "Enter detailed description"
 msgstr "Введите подробное описание"
 
-#: forms.py:33
+#: products/forms.py:33
 msgid "Enter price in USD"
 msgstr "Введите стоимость в у.е."
 
-#: models.py:30 tests/test_models.py:66
+#: products/models.py:30 products/tests/test_models.py:66
 msgid "Product"
 msgstr "Услуга"
 
-#: models.py:31 tests/test_models.py:67
+#: products/models.py:31 products/tests/test_models.py:67
 msgid "Products"
 msgstr "Услуги"
 
-#: models.py:41
+#: products/models.py:41
 msgid "Official name of the service/product"
 msgstr "Оффициальное название услуги/продукта"
 
-#: models.py:47
+#: products/models.py:47
 msgid "Detailed description of the service"
 msgstr "Подробное описание услуги"
 
-#: models.py:52
+#: products/models.py:52
 msgid "Cost cannot be negative"
 msgstr "Стоимость не может быть отрицательным числом"
 
-#: models.py:53
+#: products/models.py:53
 msgid "Cost"
 msgstr "Стоимость"
 
-#: models.py:54
+#: products/models.py:54
 msgid "Price in USD"
 msgstr "Стоимость в у.е."
 
-#: models.py:59
+#: products/models.py:59
 msgid "Is active"
 msgstr "Активно"
 
-#: models.py:60
+#: products/models.py:60
 msgid "Is service currently offered"
 msgstr "Предлагается ли услуга "
 
-#: models.py:78 tests/test_models.py:38
+#: products/models.py:78 products/tests/test_models.py:38
 msgid "No description"
 msgstr "Описание отсутствует"
 
-#: templates/products/products-create.html:5
+#: products/templates/products/products-create.html:5
 msgid "Create Service"
 msgstr "Создание услуги"
 
-#: templates/products/products-create.html:12
-#: templates/products/products-list.html:8
+#: products/templates/products/products-create.html:12
+#: products/templates/products/products-list.html:8
 msgid "Create"
 msgstr "Создать"
 
-#: templates/products/products-delete.html:5
+#: products/templates/products/products-delete.html:5
 msgid "Delete Service"
 msgstr "Удаление услуги"
 
-#: templates/products/products-delete.html:9
+#: products/templates/products/products-delete.html:9
 msgid "Are you sure you want to delete "
 msgstr "Вы уверены что хотите удалить "
 
-#: templates/products/products-delete.html:13
-#: templates/products/products-list.html:15
+#: products/templates/products/products-delete.html:13
+#: products/templates/products/products-list.html:15
 msgid "Delete"
 msgstr "Удалить"
 
-#: templates/products/products-delete.html:14
+#: products/templates/products/products-delete.html:14
 msgid "Cancel"
 msgstr "Отмена"
 
-#: templates/products/products-detail.html:5
+#: products/templates/products/products-detail.html:5
 msgid "Service Details"
 msgstr "Детальная информация об услуге"
 
-#: templates/products/products-detail.html:15
+#: products/templates/products/products-detail.html:16
 msgid "USD"
 msgstr "у.е."
 
-#: templates/products/products-detail.html:18
+#: products/templates/products/products-detail.html:19
 msgid "Edit"
 msgstr "Редактировать"
 
-#: templates/products/products-detail.html:19
+#: products/templates/products/products-detail.html:20
 msgid "Back to list"
 msgstr "Назад к списку"
 
-#: templates/products/products-list.html:5
+#: products/templates/products/products-list.html:5
 msgid "Service"
 msgstr "Услуги"
 
-#: templates/products/products-update.html:5
+#: products/templates/products/products-update.html:5
 msgid "Edit Service"
 msgstr "Редактирование услуги"
 
-#: templates/products/products-update.html:12
+#: products/templates/products/products-update.html:14
 msgid "Apply Changes"
 msgstr "Применить"
