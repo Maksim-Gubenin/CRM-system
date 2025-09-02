@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main", "dev" ]
   pull_request:
-    branches: [ "main", "dev"]
+    branches: [ "main", "dev" ]
 
 jobs:
   lint:
@@ -24,17 +24,13 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
 
-      - name: Load cached venv
-        id: cached-poetry-dependencies
-        uses: actions/cache@v3
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
-
       - name: Install dependencies
         run: |
-          poetry install --no-interaction --no-root --with dev
-          
+          poetry install --no-interaction --with dev --no-cache
+
+      - name: Verify pylint-django installation
+        run: poetry run python -c "import pylint_django; print('pylint-django installed successfully')"
+
       - name: Run Black
         run: poetry run black --check .
 
@@ -44,26 +40,35 @@ jobs:
       - name: Run Flake8
         run: poetry run flake8 .
 
-      - name: Run Pylint
-        run: poetry run pylint --recursive=y .
+      - name: Run Pylint with django plugin
+        run: poetry run pylint --recursive=y . --load-plugins=pylint_django
 
       - name: Run MyPy
         run: poetry run mypy .
 
-test:
-  name: Run utils and coverage
-  needs: lint
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.12"
-    - name: Install dependencies
-      run: |
-        poetry install --no-interaction --with dev
-    - name: Run Django utils with coverage
-      run: |
-        poetry run coverage run --source=. manage.py test
-        poetry run coverage report --fail-under=80
+  test:
+    name: Run tests and coverage
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Install dependencies
+        run: |
+          poetry install --no-interaction --with dev --no-cache
+
+      - name: Run Django tests with coverage
+        run: |
+          poetry run coverage run --source=. manage.py test
+          poetry run coverage report --fail-under=80
