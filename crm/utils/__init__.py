@@ -1,3 +1,17 @@
-from .factories import ProductFactory, UserFactory
+from .factories import (
+    AdvertisementFactory,
+    ContractFactory,
+    CustomerFactory,
+    LeadFactory,
+    ProductFactory,
+    UserFactory,
+)
 
-__all__ = ["ProductFactory", "UserFactory"]
+__all__ = [
+    "AdvertisementFactory",
+    "ProductFactory",
+    "UserFactory",
+    "ContractFactory",
+    "CustomerFactory",
+    "LeadFactory",
+]
