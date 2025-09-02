@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main", "dev" ]
   pull_request:
-    branches: [ "main", "dev"]
+    branches: [ "main", "dev" ]
 
 jobs:
   lint:
@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install --no-interaction --no-root --with dev
-          
+
       - name: Run Black
         run: poetry run black --check .
 
@@ -50,20 +50,29 @@ jobs:
       - name: Run MyPy
         run: poetry run mypy .
 
-test:
-  name: Run utils and coverage
-  needs: lint
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.12"
-    - name: Install dependencies
-      run: |
-        poetry install --no-interaction --with dev
-    - name: Run Django utils with coverage
-      run: |
-        poetry run coverage run --source=. manage.py test
-        poetry run coverage report --fail-under=80
+  test:
+    name: Run tests and coverage
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Install dependencies
+        run: |
+          poetry install --no-interaction --with dev
+
+      - name: Run Django tests with coverage
+        run: |
+          poetry run coverage run --source=. manage.py test
+          poetry run coverage report --fail-under=80
