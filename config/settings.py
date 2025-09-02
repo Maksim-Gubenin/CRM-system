@@ -29,7 +29,7 @@ load_dotenv(BASE_DIR / ".env")
 if "test" in sys.argv:
     SECRET_KEY = "test-secret-key-for-ci-12345"
 else:
-    SECRET_KEY = getenv("DJANGO_SECRET_KEY")
+    SECRET_KEY = getenv("DJANGO_SECRET_KEY", "django-insecure-fallback-key-for-development")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = getenv("DJANGO_DEBUG", "0") == "1"
