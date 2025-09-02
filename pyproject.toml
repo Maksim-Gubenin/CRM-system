@@ -6,6 +6,7 @@ authors = [
     {name = "Maksim",email = "maksimgubenin@mail.ru"}
 ]
 readme = "README.md"
+package-mode = false
 requires-python = ">=3.12"
 dependencies = [
     "django (>=5.2.4,<6.0.0)",
