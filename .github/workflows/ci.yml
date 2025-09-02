@@ -26,8 +26,8 @@ jobs:
 
       - name: Install dependencies with explicit pylint-django
         run: |
-          poetry install --no-interaction --with dev --no-cache
-          poetry add --group dev pylint-django@^2.6.1
+          poetry install --no-interaction --with dev --no-cache --no-root
+          poetry add --group dev pylint-django@^2.6.1 --no-root
 
       - name: Verify pylint-django installation
         run: poetry run python -c "import pylint_django; print('pylint-django installed successfully')"
