@@ -536,6 +536,42 @@ spelling = ["pyenchant (>=3.2,<4.0)"]
 testutils = ["gitpython (>3)"]
 
 [[package]]
+name = "pylint-django"
+version = "2.6.1"
+description = "A Pylint plugin to help Pylint understand the Django web framework"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["dev"]
+markers = "python_version < \"4.0\""
+files = [
+    {file = "pylint-django-2.6.1.tar.gz", hash = "sha256:19e8c85a8573a04e3de7be2ba91e9a7c818ebf05e1b617be2bbae67a906b725f"},
+    {file = "pylint_django-2.6.1-py3-none-any.whl", hash = "sha256:359f68fe8c810ee6bc8e1ab4c83c19b15a43b234a24b08978f47a23462b5ce28"},
+]
+
+[package.dependencies]
+pylint = ">=3.0,<4"
+pylint-plugin-utils = ">=0.8"
+
+[package.extras]
+with-django = ["Django (>=2.2)"]
+
+[[package]]
+name = "pylint-plugin-utils"
+version = "0.9.0"
+description = "Utilities and helpers for writing Pylint plugins"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["dev"]
+markers = "python_version < \"4.0\""
+files = [
+    {file = "pylint_plugin_utils-0.9.0-py3-none-any.whl", hash = "sha256:16e9b84e5326ba893a319a0323fcc8b4bcc9c71fc654fcabba0605596c673818"},
+    {file = "pylint_plugin_utils-0.9.0.tar.gz", hash = "sha256:5468d763878a18d5cc4db46eaffdda14313b043c962a263a7d78151b90132055"},
+]
+
+[package.dependencies]
+pylint = ">=1.7"
+
+[[package]]
 name = "python-dotenv"
 version = "1.1.1"
 description = "Read key-value pairs from a .env file and set them as environment variables"
@@ -607,4 +643,4 @@ markers = {main = "sys_platform == \"win32\""}
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "7c79ec6952ffebe79682144828d5a66b36cb7266fec0f022e1d6e3728f02549a"
+content-hash = "4eefd377cca5f0e4c56294acf8e561882ece6a6082e776d680fab63b9c95551f"
