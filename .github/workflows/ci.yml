@@ -69,7 +69,8 @@ jobs:
           poetry install --no-interaction --with dev --no-cache
 
       - name: Run Django tests with coverage
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
-          export SECRET_KEY=$(python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())")
           poetry run coverage run --source=. manage.py test
           poetry run coverage report --fail-under=80
