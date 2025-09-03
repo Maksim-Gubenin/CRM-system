@@ -14,9 +14,19 @@ from django.views.generic import (
 
 from advertisements.forms import ADSForm
 from advertisements.models import Advertisement as ads
+from crm.mixins import (
+    CreateLoggingMixin,
+    DeleteLoggingMixin,
+    DetailLoggingMixin,
+    ListLoggingMixin,
+    PerformanceLoggingMixin,
+    UpdateLoggingMixin,
+)
 
 
-class ADSListView(PermissionRequiredMixin, ListView):
+class ADSListView(
+    ListLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, ListView
+):
     """
     Displays a paginated list of active advertisements.
 
@@ -39,7 +49,9 @@ class ADSListView(PermissionRequiredMixin, ListView):
     queryset = ads.objects.filter(is_active=True).all()
 
 
-class ADSDetailView(PermissionRequiredMixin, DetailView):
+class ADSDetailView(
+    DetailLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DetailView
+):
     """
     Displays detailed information about a single active advertisement.
 
@@ -58,7 +70,9 @@ class ADSDetailView(PermissionRequiredMixin, DetailView):
         return super().get_queryset().filter(is_active=True)
 
 
-class ADSUpdateView(PermissionRequiredMixin, UpdateView):
+class ADSUpdateView(
+    UpdateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, UpdateView
+):
     """
     Handles editing of an existing active advertisement.
 
@@ -83,7 +97,9 @@ class ADSUpdateView(PermissionRequiredMixin, UpdateView):
         return self.object.get_absolute_url()
 
 
-class ADSCreateView(PermissionRequiredMixin, CreateView):
+class ADSCreateView(
+    CreateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, CreateView
+):
     """
     Handles creation of new advertisements.
 
@@ -102,7 +118,9 @@ class ADSCreateView(PermissionRequiredMixin, CreateView):
     success_url: str = reverse_lazy("advertisements:list")
 
 
-class ADSDeleteView(PermissionRequiredMixin, DeleteView):
+class ADSDeleteView(
+    DeleteLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DeleteView
+):
     """
     Handles deletion of active advertisements.
 
@@ -123,12 +141,9 @@ class ADSDeleteView(PermissionRequiredMixin, DeleteView):
         return super().get_queryset().filter(is_active=True)
 
 
-class ADSStatisticsView(PermissionRequiredMixin, TemplateView):
+class ADSStatisticsView(PerformanceLoggingMixin, PermissionRequiredMixin, TemplateView):
     """
     View for displaying advertising campaign statistics.
-
-    Shows leads count, active customers count, and contract-to-cost ratio
-    for each advertisement campaign.
 
     Attributes:
         permission_required (str): Permission required to access this view
@@ -139,7 +154,13 @@ class ADSStatisticsView(PermissionRequiredMixin, TemplateView):
     template_name = "advertisements/ads-statistic.html"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        """Returns queryset advertisements."""
+        """
+        Returns context data with advertisement statistics.
+
+        Returns:
+            Dict[str, Any]: Context containing all advertisements for statistics display
+        """
         context: dict[str, Any] = super().get_context_data(**kwargs)
-        context["ads"] = ads.objects.all()
+        advertisements = ads.objects.all()
+        context["ads"] = advertisements
         return context

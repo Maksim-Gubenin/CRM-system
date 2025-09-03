@@ -172,8 +172,160 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGLEVEL = getenv("DJANGO_LOGLEVEL", "info").upper()
-
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/accounts/login/"
+
+LOG_DIR = BASE_DIR / "logs"
+LOG_DIR.mkdir(exist_ok=True)
+
+LOGLEVEL = getenv("DJANGO_LOGLEVEL", "INFO").upper()
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {asctime} {module} {message}",
+            "style": "{",
+        },
+        "django.server": {
+            "()": "django.utils.log.ServerFormatter",
+            "format": "[{server_time}] {message}",
+            "style": "{",
+        },
+    },
+    "filters": {
+        "require_debug_true": {
+            "()": "django.utils.log.RequireDebugTrue",
+        },
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        },
+    },
+    "handlers": {
+        "file": {
+            "level": "INFO",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": LOG_DIR / "django.log",
+            "maxBytes": 1024 * 1024 * 5,  # 5 MB
+            "backupCount": 5,
+            "formatter": "verbose",
+        },
+        "error_file": {
+            "level": "ERROR",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": LOG_DIR / "errors.log",
+            "maxBytes": 1024 * 1024 * 5,  # 5 MB
+            "backupCount": 5,
+            "formatter": "verbose",
+        },
+        "console": {
+            "level": "DEBUG",
+            "filters": ["require_debug_true"],
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+        "db_log": {
+            "level": "DEBUG",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": LOG_DIR / "db_queries.log",
+            "maxBytes": 1024 * 1024 * 2,  # 2 MB
+            "backupCount": 3,
+            "formatter": "verbose",
+        },
+        "security_log": {
+            "level": "INFO",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": LOG_DIR / "security.log",
+            "maxBytes": 1024 * 1024 * 2,  # 2 MB
+            "backupCount": 3,
+            "formatter": "verbose",
+        },
+        "crm_log": {
+            "level": "INFO",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": LOG_DIR / "crm_business.log",
+            "maxBytes": 1024 * 1024 * 5,  # 5 MB
+            "backupCount": 5,
+            "formatter": "verbose",
+        },
+        "mail_admins": {
+            "level": "ERROR",
+            "filters": ["require_debug_false"],
+            "class": "django.utils.log.AdminEmailHandler",
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console", "file", "error_file"],
+            "level": "INFO",
+            "propagate": True,
+        },
+        "django": {
+            "handlers": ["console", "file", "error_file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "django.db.backends": {
+            "handlers": ["db_log"],
+            "level": "DEBUG" if DEBUG else "INFO",
+            "propagate": False,
+        },
+        "django.security": {
+            "handlers": ["security_log", "mail_admins"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "django.server": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "crm": {
+            "handlers": ["crm_log", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "leads": {
+            "handlers": ["crm_log", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "advertisements": {
+            "handlers": ["crm_log", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "products": {
+            "handlers": ["crm_log", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "customers": {
+            "handlers": ["crm_log", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "contracts": {
+            "handlers": ["crm_log", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
+
+if not DEBUG:
+    ADMINS = [("Admin", getenv("ADMIN_EMAIL", "admin@example.com"))]
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = getenv("EMAIL_HOST", "smtp.gmail.com")
+    EMAIL_PORT = int(getenv("EMAIL_PORT", 587))
+    EMAIL_USE_TLS = getenv("EMAIL_USE_TLS", "True") == "True"
+    EMAIL_HOST_USER = getenv("EMAIL_HOST_USER", "")
+    EMAIL_HOST_PASSWORD = getenv("EMAIL_HOST_PASSWORD", "")
+    SERVER_EMAIL = getenv("SERVER_EMAIL", EMAIL_HOST_USER)

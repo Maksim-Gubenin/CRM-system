@@ -12,9 +12,19 @@ from django.views.generic import (
 
 from contracts.forms import ContractForm
 from contracts.models import Contract
+from crm.mixins import (
+    CreateLoggingMixin,
+    DeleteLoggingMixin,
+    DetailLoggingMixin,
+    ListLoggingMixin,
+    PerformanceLoggingMixin,
+    UpdateLoggingMixin,
+)
 
 
-class ContractsListView(PermissionRequiredMixin, ListView):
+class ContractsListView(
+    ListLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, ListView
+):
     """
     Displays a paginated list of all contracts.
 
@@ -34,7 +44,9 @@ class ContractsListView(PermissionRequiredMixin, ListView):
     context_object_name: str = "contracts"
 
 
-class ContractsDetailView(PermissionRequiredMixin, DetailView):
+class ContractsDetailView(
+    DetailLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DetailView
+):
     """
     Displays detailed information about a single contract.
 
@@ -49,7 +61,9 @@ class ContractsDetailView(PermissionRequiredMixin, DetailView):
     template_name: str = "contracts/contracts-detail.html"
 
 
-class ContractsUpdateView(PermissionRequiredMixin, UpdateView):
+class ContractsUpdateView(
+    UpdateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, UpdateView
+):
     """
     Handles editing of an existing contract.
 
@@ -70,7 +84,9 @@ class ContractsUpdateView(PermissionRequiredMixin, UpdateView):
         return self.object.get_absolute_url()
 
 
-class ContractsCreateView(PermissionRequiredMixin, CreateView):
+class ContractsCreateView(
+    CreateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, CreateView
+):
     """
     Handles creation of new contracts.
 
@@ -89,7 +105,9 @@ class ContractsCreateView(PermissionRequiredMixin, CreateView):
     success_url: str = reverse_lazy("contracts:list")
 
 
-class ContractDeleteView(PermissionRequiredMixin, DeleteView):
+class ContractDeleteView(
+    DeleteLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DeleteView
+):
     """
     Handles deletion of contracts.
 

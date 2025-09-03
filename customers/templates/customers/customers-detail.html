@@ -13,7 +13,7 @@
                 <div class="d-flex justify-content-end fw-bold">{{ object.lead.email }}</div>
                 <div class="d-flex justify-content-center fw-bold gap-2 mt-3">
                     <a href="{% url 'customers:update' object.pk %}" class="btn btn-primary">{% trans "Edit" %}</a>
-                    <a href="{% url 'contracts:list' %}" class="btn btn-secondary">{% trans "Back to list" %}</a>
+                    <a href="{% url 'customers:list' %}" class="btn btn-secondary">{% trans "Back to list" %}</a>
                 </div>
             </div>
         </div>

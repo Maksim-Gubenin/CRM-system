@@ -10,11 +10,21 @@ from django.views.generic import (
     UpdateView,
 )
 
+from crm.mixins import (
+    CreateLoggingMixin,
+    DeleteLoggingMixin,
+    DetailLoggingMixin,
+    ListLoggingMixin,
+    PerformanceLoggingMixin,
+    UpdateLoggingMixin,
+)
 from customers.forms import CustomerForm
 from customers.models import Customer
 
 
-class CustomersListView(PermissionRequiredMixin, ListView):
+class CustomersListView(
+    ListLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, ListView
+):
     """
     Displays a paginated list of all active customers.
 
@@ -34,7 +44,9 @@ class CustomersListView(PermissionRequiredMixin, ListView):
     context_object_name: str = "customers"
 
 
-class CustomersDetailView(PermissionRequiredMixin, DetailView):
+class CustomersDetailView(
+    DetailLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DetailView
+):
     """
     Displays detailed information about a single customer.
 
@@ -49,7 +61,9 @@ class CustomersDetailView(PermissionRequiredMixin, DetailView):
     template_name: str = "customers/customers-detail.html"
 
 
-class CustomersUpdateView(PermissionRequiredMixin, UpdateView):
+class CustomersUpdateView(
+    UpdateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, UpdateView
+):
     """
     Handles editing of an existing customer.
 
@@ -70,7 +84,9 @@ class CustomersUpdateView(PermissionRequiredMixin, UpdateView):
         return self.object.get_absolute_url()
 
 
-class CustomersCreateView(PermissionRequiredMixin, CreateView):
+class CustomersCreateView(
+    CreateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, CreateView
+):
     """
     Handles creation of new customers.
 
@@ -89,7 +105,9 @@ class CustomersCreateView(PermissionRequiredMixin, CreateView):
     success_url: str = reverse_lazy("customers:list")
 
 
-class CustomersDeleteView(PermissionRequiredMixin, DeleteView):
+class CustomersDeleteView(
+    DeleteLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DeleteView
+):
     """
     Handles deletion of customers.
 
