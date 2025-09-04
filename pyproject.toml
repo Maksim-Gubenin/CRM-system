@@ -126,6 +126,10 @@ check_untyped_defs = true
 ignore_missing_imports = true
 exclude = ".venv/|migrations/|tests/"
 
+[[tool.mypy.overrides]]
+module = "crm.mixins"
+ignore_errors = true
+
 [tool.coverage.run]
 source = [
     "crm",

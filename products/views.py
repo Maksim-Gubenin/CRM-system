@@ -11,11 +11,21 @@ from django.views.generic import (
     UpdateView,
 )
 
+from crm.mixins import (
+    CreateLoggingMixin,
+    DeleteLoggingMixin,
+    DetailLoggingMixin,
+    ListLoggingMixin,
+    PerformanceLoggingMixin,
+    UpdateLoggingMixin,
+)
 from products.forms import ProductForm
 from products.models import Product
 
 
-class ProductsListView(PermissionRequiredMixin, ListView):
+class ProductsListView(
+    ListLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, ListView
+):
     """
     Displays a paginated list of active products.
 
@@ -37,7 +47,9 @@ class ProductsListView(PermissionRequiredMixin, ListView):
     queryset = Product.objects.filter(is_active=True)
 
 
-class ProductsDetailView(PermissionRequiredMixin, DetailView):
+class ProductsDetailView(
+    DetailLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DetailView
+):
     """
     Displays detailed information about a single active product.
 
@@ -54,7 +66,9 @@ class ProductsDetailView(PermissionRequiredMixin, DetailView):
         return super().get_queryset().filter(is_active=True)
 
 
-class ProductsUpdateView(PermissionRequiredMixin, UpdateView):
+class ProductsUpdateView(
+    UpdateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, UpdateView
+):
     """
     Handles editing of an existing active product.
 
@@ -78,7 +92,9 @@ class ProductsUpdateView(PermissionRequiredMixin, UpdateView):
         return self.object.get_absolute_url()
 
 
-class ProductsCreateView(PermissionRequiredMixin, CreateView):
+class ProductsCreateView(
+    CreateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, CreateView
+):
     """
     Handles creation of new products.
 
@@ -96,7 +112,9 @@ class ProductsCreateView(PermissionRequiredMixin, CreateView):
     success_url: str = reverse_lazy("products:list")
 
 
-class ProductsDeleteView(PermissionRequiredMixin, DeleteView):
+class ProductsDeleteView(
+    DeleteLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DeleteView
+):
     """
     Handles deletion of active products.
 

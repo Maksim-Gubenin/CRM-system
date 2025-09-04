@@ -10,11 +10,21 @@ from django.views.generic import (
     UpdateView,
 )
 
+from crm.mixins import (
+    CreateLoggingMixin,
+    DeleteLoggingMixin,
+    DetailLoggingMixin,
+    ListLoggingMixin,
+    PerformanceLoggingMixin,
+    UpdateLoggingMixin,
+)
 from leads.forms import LeadForm
 from leads.models import Lead
 
 
-class LeadsListView(PermissionRequiredMixin, ListView):
+class LeadsListView(
+    ListLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, ListView
+):
     """
     Displays a paginated list of all leads.
 
@@ -34,7 +44,9 @@ class LeadsListView(PermissionRequiredMixin, ListView):
     context_object_name: str = "leads"
 
 
-class LeadsDetailView(PermissionRequiredMixin, DetailView):
+class LeadsDetailView(
+    DetailLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DetailView
+):
     """
     Displays detailed information about a single lead.
 
@@ -49,7 +61,9 @@ class LeadsDetailView(PermissionRequiredMixin, DetailView):
     template_name: str = "leads/leads-detail.html"
 
 
-class LeadsUpdateView(PermissionRequiredMixin, UpdateView):
+class LeadsUpdateView(
+    UpdateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, UpdateView
+):
     """
     Handles editing of an existing lead.
 
@@ -70,7 +84,9 @@ class LeadsUpdateView(PermissionRequiredMixin, UpdateView):
         return self.object.get_absolute_url()
 
 
-class LeadsCreateView(PermissionRequiredMixin, CreateView):
+class LeadsCreateView(
+    CreateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, CreateView
+):
     """
     Handles creation of new leads.
 
@@ -89,7 +105,9 @@ class LeadsCreateView(PermissionRequiredMixin, CreateView):
     success_url: str = reverse_lazy("leads:list")
 
 
-class LeadsDeleteView(PermissionRequiredMixin, DeleteView):
+class LeadsDeleteView(
+    DeleteLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DeleteView
+):
     """
     Handles deletion of leads.
 
