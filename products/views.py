@@ -13,9 +13,10 @@ from django.views.generic import (
 
 from products.forms import ProductForm
 from products.models import Product
+from crm.cache import ViewCacheMixin
 
 
-class ProductsListView(PermissionRequiredMixin, ListView):
+class ProductsListView(ViewCacheMixin, PermissionRequiredMixin, ListView):
     """
     Displays a paginated list of active products.
 
@@ -37,7 +38,7 @@ class ProductsListView(PermissionRequiredMixin, ListView):
     queryset = Product.objects.filter(is_active=True)
 
 
-class ProductsDetailView(PermissionRequiredMixin, DetailView):
+class ProductsDetailView(ViewCacheMixin, PermissionRequiredMixin, DetailView):
     """
     Displays detailed information about a single active product.
 

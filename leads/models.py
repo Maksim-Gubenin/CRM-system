@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from crm.models import BaseModel
+from crm.cache import cache_method
 
 
 class Lead(BaseModel):
@@ -71,11 +72,6 @@ class Lead(BaseModel):
         verbose_name=_("Advertisement"),
         help_text=_("Related advertisement campaign (optional)"),
     )
-
-    def __str__(self) -> str:
-        """String representation of the lead."""
-
-        return f"Lead(pk={self.pk}, surname={self.last_name}, name={self.first_name})"
 
     def get_absolute_url(self) -> Any:
         """Returns the absolute URL of the object."""

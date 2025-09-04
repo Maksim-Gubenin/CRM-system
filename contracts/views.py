@@ -12,9 +12,10 @@ from django.views.generic import (
 
 from contracts.forms import ContractForm
 from contracts.models import Contract
+from crm.cache import ViewCacheMixin
 
 
-class ContractsListView(PermissionRequiredMixin, ListView):
+class ContractsListView(ViewCacheMixin, PermissionRequiredMixin, ListView):
     """
     Displays a paginated list of all contracts.
 
@@ -49,7 +50,7 @@ class ContractsDetailView(PermissionRequiredMixin, DetailView):
     template_name: str = "contracts/contracts-detail.html"
 
 
-class ContractsUpdateView(PermissionRequiredMixin, UpdateView):
+class ContractsUpdateView(ViewCacheMixin, PermissionRequiredMixin, UpdateView):
     """
     Handles editing of an existing contract.
 

@@ -12,9 +12,10 @@ from django.views.generic import (
 
 from customers.forms import CustomerForm
 from customers.models import Customer
+from crm.cache import ViewCacheMixin
 
 
-class CustomersListView(PermissionRequiredMixin, ListView):
+class CustomersListView(ViewCacheMixin, PermissionRequiredMixin, ListView):
     """
     Displays a paginated list of all active customers.
 
@@ -34,7 +35,7 @@ class CustomersListView(PermissionRequiredMixin, ListView):
     context_object_name: str = "customers"
 
 
-class CustomersDetailView(PermissionRequiredMixin, DetailView):
+class CustomersDetailView(ViewCacheMixin, PermissionRequiredMixin, DetailView):
     """
     Displays detailed information about a single customer.
 

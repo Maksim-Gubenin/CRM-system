@@ -6,27 +6,13 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from crm.models import BaseModel
+from crm.cache import cache_method
 
 
 class Product(BaseModel):
-    """Represents a service or product offered by the company.
-
-    Attributes:
-        name (str): Product name (255 chars max).
-        description (str|None): Detailed description (optional).
-        cost (Decimal): Price (10 digits, 2 decimals, non-negative).
-        is_active (bool): Whether product is currently offered.
-
-    Properties:
-        short_description: First 50 chars of description or placeholder.
-
-    Methods:
-        get_absolute_url(): Returns URL for product detail view.
-    """
+    """Represents a service or product with caching"""
 
     class Meta:
-        """Metadata options for the Product model."""
-
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
         ordering = ["name"]
@@ -53,27 +39,15 @@ class Product(BaseModel):
         verbose_name=_("Cost"),
         help_text=_("Price in USD"),
     )
-
     is_active = models.BooleanField(
         default=True,
         verbose_name=_("Is active"),
         help_text=_("Is service currently offered"),
     )
 
-    def __str__(self) -> str:
-        """String representation of the lead."""
-
-        return f"Product(pk={self.pk}, name={self.name})"
-
     @property
     def short_description(self) -> Any:
-        """Returns shortened description for preview purposes.
-
-        Returns:
-            str: First 50 characters of description + '...' if exists,
-                 otherwise 'No description' placeholder.
-        """
-
+        """Returns shortened description for preview purposes"""
         if not self.description:
             return _("No description")
         return (
@@ -82,7 +56,11 @@ class Product(BaseModel):
             else self.description
         )
 
-    def get_absolute_url(self) -> Any:
-        """Returns the absolute URL of the object."""
+    @cache_method(timeout=600)
+    def active_advertisements_count(self) -> int:
+        """Count of active advertisements for this product"""
+        print(f"📊 [ACTIVE ADS COUNT] Вычисляю для product_{self.pk}")
+        return self.advertisement_set.filter(is_active=True).count()
 
+    def get_absolute_url(self) -> Any:
         return reverse("products:detail", kwargs={"pk": self.pk})

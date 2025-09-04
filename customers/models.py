@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from crm.models import BaseModel
+from crm.cache import cache_method
 
 
 class Customer(BaseModel):
@@ -41,10 +42,6 @@ class Customer(BaseModel):
         help_text=_("Active contract for this customer"),
     )
 
-    def __str__(self) -> str:
-        """String representation of the customer."""
-
-        return f"Customer(pk={self.pk})"
 
     def get_absolute_url(self) -> Any:
         """Returns the absolute URL to view this customer.

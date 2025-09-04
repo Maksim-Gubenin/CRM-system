@@ -14,9 +14,10 @@ from django.views.generic import (
 
 from advertisements.forms import ADSForm
 from advertisements.models import Advertisement as ads
+from crm.cache import ViewCacheMixin
 
 
-class ADSListView(PermissionRequiredMixin, ListView):
+class ADSListView(ViewCacheMixin, PermissionRequiredMixin, ListView):
     """
     Displays a paginated list of active advertisements.
 
@@ -39,7 +40,7 @@ class ADSListView(PermissionRequiredMixin, ListView):
     queryset = ads.objects.filter(is_active=True).all()
 
 
-class ADSDetailView(PermissionRequiredMixin, DetailView):
+class ADSDetailView(ViewCacheMixin, PermissionRequiredMixin, DetailView):
     """
     Displays detailed information about a single active advertisement.
 
@@ -123,7 +124,7 @@ class ADSDeleteView(PermissionRequiredMixin, DeleteView):
         return super().get_queryset().filter(is_active=True)
 
 
-class ADSStatisticsView(PermissionRequiredMixin, TemplateView):
+class ADSStatisticsView(ViewCacheMixin, PermissionRequiredMixin, TemplateView):
     """
     View for displaying advertising campaign statistics.
 
@@ -134,7 +135,8 @@ class ADSStatisticsView(PermissionRequiredMixin, TemplateView):
         permission_required (str): Permission required to access this view
         template_name (str): Path to the template used for rendering
     """
-
+    cache_timeout = 60 * 10  # 10 минут для статистики
+    
     permission_required = "advertisements.view_advertisement_stats"
     template_name = "advertisements/ads-statistic.html"
 
@@ -143,3 +145,8 @@ class ADSStatisticsView(PermissionRequiredMixin, TemplateView):
         context: dict[str, Any] = super().get_context_data(**kwargs)
         context["ads"] = ads.objects.all()
         return context
+
+    def get_cache_key(self) -> str:
+        """Дополнительный ключ для статистики"""
+        base_key = super().get_cache_key()
+        return f"{base_key}_stats"

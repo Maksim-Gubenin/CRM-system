@@ -91,13 +91,9 @@ WSGI_APPLICATION = "config.wsgi.application"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": getenv("DB_NAME", "crm_system"),
-        "USER": getenv("DB_USER", "web_app"),
-        "PASSWORD": getenv("DB_PASSWORD", "5966952900ae"),
-        "HOST": getenv("DB_HOST", "localhost"),
-        "PORT": getenv("DB_PORT", 5432),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -177,3 +173,17 @@ LOGLEVEL = getenv("DJANGO_LOGLEVEL", "info").upper()
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/accounts/login/"
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': BASE_DIR / '.cache',
+        'TIMEOUT': 300,
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000, 
+            'CULL_FREQUENCY': 3, 
+        }
+    }
+}
+
+os.makedirs(BASE_DIR / '.cache', exist_ok=True)

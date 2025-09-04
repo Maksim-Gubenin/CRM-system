@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from crm.models import BaseModel
+from crm.cache import cache_method
 
 
 class Contract(BaseModel):
@@ -76,10 +77,6 @@ class Contract(BaseModel):
         help_text=_("Total contract value"),
     )
 
-    def __str__(self) -> str:
-        """String representation: '[Name] - Customer (Product)'"""
-
-        return f"Contract(pk={self.pk}, name={self.name})"
 
     def clean(self) -> None:
         """Validates contract dates."""

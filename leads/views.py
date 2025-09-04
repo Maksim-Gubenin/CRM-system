@@ -12,9 +12,10 @@ from django.views.generic import (
 
 from leads.forms import LeadForm
 from leads.models import Lead
+from crm.cache import ViewCacheMixin
 
 
-class LeadsListView(PermissionRequiredMixin, ListView):
+class LeadsListView(ViewCacheMixin, PermissionRequiredMixin, ListView):
     """
     Displays a paginated list of all leads.
 
@@ -34,7 +35,7 @@ class LeadsListView(PermissionRequiredMixin, ListView):
     context_object_name: str = "leads"
 
 
-class LeadsDetailView(PermissionRequiredMixin, DetailView):
+class LeadsDetailView(ViewCacheMixin, PermissionRequiredMixin, DetailView):
     """
     Displays detailed information about a single lead.
 
