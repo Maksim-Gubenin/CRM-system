@@ -44,6 +44,11 @@
                 <span><i class="fas fa-ad"></i></span><span class="ml-1">{% trans "Advertising campaigns" %}</span>
             </a></li>
             {% endif %}
+            {% if perms.advertisements.view_advertisement_stats %}
+            <li><a href="{% url 'advertisements:statistic' %}" class="bar-item text-decoration-none px-3 py-3 d-block">
+                <span><i class="fas fa-chart-bar"></i></span><span class="ml-1">{% trans "Statistics" %}</span>
+            </a></li>
+            {% endif %}
             {% if perms.leads.view_lead %}
             <li><a href="{% url 'leads:list' %}" class="bar-item text-decoration-none px-3 py-3 d-block">
                 <span><i class="fas fa-user-clock"></i></span><span class="px-1">{% trans "Leads" %}</span>
@@ -80,7 +85,6 @@
             </li>
 
             <li>
-
                 <form method="post" action="{% url 'logout' %}" class="d-inline">
                     {% csrf_token %}
                     <button type="submit"
