@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.test import TestCase
 from django.urls import reverse
 
@@ -14,6 +15,14 @@ class ADSListViewTest(TestCase):
         inactive_ads (List[Advertisement]): List of inactive advertisement instances
         superuser (User): Superuser instance
     """
+
+    def setUp(self):
+        """Set up test environment.
+
+        Clears cache before each test to prevent interference from
+        cached data between test runs.
+        """
+        cache.clear()
 
     @classmethod
     def setUpTestData(cls) -> None:
@@ -74,6 +83,14 @@ class ADSDetailViewTest(TestCase):
         inactive_ad (Advertisement): Inactive advertisement instance
         superuser (User): Superuser instance
     """
+
+    def setUp(self):
+        """Set up test environment.
+
+        Clears cache before each test to prevent interference from
+        cached data between test runs.
+        """
+        cache.clear()
 
     @classmethod
     def setUpTestData(cls) -> None:

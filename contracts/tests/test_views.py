@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
+from django.core.cache import cache
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
@@ -27,6 +28,14 @@ class ContractsListViewTest(TestCase):
         user_without_permission (User): User without view_contract permission
         superuser (User): Superuser instance
     """
+
+    def setUp(self):
+        """Set up test environment.
+
+        Clears cache before each test to prevent interference from
+        cached data between test runs.
+        """
+        cache.clear()
 
     @classmethod
     def setUpTestData(cls) -> None:
@@ -196,6 +205,15 @@ class ContractsUpdateViewTest(TestCase):
         superuser (User): Superuser instance
         valid_data (Dict): Valid form data for update
     """
+
+    def setUp(self):
+        """Set up test environment.
+
+        Clears cache before each test to prevent interference from
+        cached data between test runs.
+        """
+
+        cache.clear()
 
     @classmethod
     def setUpTestData(cls) -> None:
