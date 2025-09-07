@@ -351,3 +351,14 @@ if not DEBUG:
     EMAIL_HOST_USER = getenv("EMAIL_HOST_USER", "")
     EMAIL_HOST_PASSWORD = getenv("EMAIL_HOST_PASSWORD", "")
     SERVER_EMAIL = getenv("SERVER_EMAIL", EMAIL_HOST_USER)
+
+
+MESSAGE_TAGS = {
+    messages.DEBUG: "debug",
+    messages.INFO: "info",
+    messages.SUCCESS: "success",
+    messages.WARNING: "warning",
+    messages.ERROR: "danger",
+}
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"

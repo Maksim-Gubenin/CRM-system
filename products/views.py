@@ -2,6 +2,8 @@ from typing import Any, Type
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import QuerySet
+from django.forms import BaseModelForm
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -11,6 +13,7 @@ from django.views.generic import (
     UpdateView,
 )
 
+from crm.cache import ViewCacheInvalidationMixin, ViewCacheMixin
 from crm.mixins import (
     CreateLoggingMixin,
     DeleteLoggingMixin,
@@ -24,7 +27,11 @@ from products.models import Product
 
 
 class ProductsListView(
-    ListLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, ListView
+    ViewCacheMixin,
+    ListLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    ListView,
 ):
     """
     Displays a paginated list of active products.
@@ -48,7 +55,11 @@ class ProductsListView(
 
 
 class ProductsDetailView(
-    DetailLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DetailView
+    ViewCacheMixin,
+    DetailLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    DetailView,
 ):
     """
     Displays detailed information about a single active product.
@@ -67,7 +78,11 @@ class ProductsDetailView(
 
 
 class ProductsUpdateView(
-    UpdateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, UpdateView
+    ViewCacheInvalidationMixin,
+    UpdateLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    UpdateView,
 ):
     """
     Handles editing of an existing active product.
@@ -91,15 +106,41 @@ class ProductsUpdateView(
         """Returns URL to redirect to after successful update."""
         return self.object.get_absolute_url()
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """
+        Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+        response = super().form_valid(form)
+
+        self.invalidate_object_cache(self.object)
+
+        view_classes_to_invalidate = [
+            "ProductsListView",
+            "ProductsDetailView",
+        ]
+        self.invalidate_view_cache(view_classes_to_invalidate)
+
+        return response
+
 
 class ProductsCreateView(
-    CreateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, CreateView
+    ViewCacheInvalidationMixin,
+    CreateLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    CreateView,
 ):
     """
     Handles creation of new products.
 
     Attributes:
-        model (Type[Product]): Model class this view operates on
+        model (Type[Product]: Model class this view operates on
         template_name (str): Path to the template used for rendering
         form_class (Type[ProductForm]): Form class used for creation
         success_url (str): URL to redirect to after successful creation
@@ -111,9 +152,31 @@ class ProductsCreateView(
     form_class: Type[ProductForm] = ProductForm
     success_url: str = reverse_lazy("products:list")
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """
+        Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+        response = super().form_valid(form)
+
+        self.invalidate_object_cache(self.object)
+
+        self.invalidate_view_cache(["ProductsListView"])
+
+        return response
+
 
 class ProductsDeleteView(
-    DeleteLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DeleteView
+    ViewCacheInvalidationMixin,
+    DeleteLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    DeleteView,
 ):
     """
     Handles deletion of active products.
@@ -132,3 +195,19 @@ class ProductsDeleteView(
     def get_queryset(self) -> QuerySet[Product]:
         """Returns queryset filtered to only include active products."""
         return super().get_queryset().filter(is_active=True)
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """
+        Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+        self.invalidate_object_cache(self.get_object())
+        self.invalidate_view_cache(["ProductsListView"])
+        response = super().form_valid(form)
+
+        return response

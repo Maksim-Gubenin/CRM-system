@@ -1,6 +1,8 @@
 from typing import Any, Type
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.forms import BaseModelForm
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -10,12 +12,14 @@ from django.views.generic import (
     UpdateView,
 )
 
+from crm.cache import ViewCacheInvalidationMixin, ViewCacheMixin
 from crm.mixins import (
     CreateLoggingMixin,
     DeleteLoggingMixin,
     DetailLoggingMixin,
     ListLoggingMixin,
     PerformanceLoggingMixin,
+    ProtectedErrorMixin,
     UpdateLoggingMixin,
 )
 from leads.forms import LeadForm
@@ -23,7 +27,11 @@ from leads.models import Lead
 
 
 class LeadsListView(
-    ListLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, ListView
+    ViewCacheMixin,
+    ListLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    ListView,
 ):
     """
     Displays a paginated list of all leads.
@@ -45,7 +53,11 @@ class LeadsListView(
 
 
 class LeadsDetailView(
-    DetailLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DetailView
+    ViewCacheMixin,
+    DetailLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    DetailView,
 ):
     """
     Displays detailed information about a single lead.
@@ -62,7 +74,11 @@ class LeadsDetailView(
 
 
 class LeadsUpdateView(
-    UpdateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, UpdateView
+    ViewCacheInvalidationMixin,
+    UpdateLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    UpdateView,
 ):
     """
     Handles editing of an existing lead.
@@ -83,9 +99,35 @@ class LeadsUpdateView(
         """Returns URL to redirect to after successful update."""
         return self.object.get_absolute_url()
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+        response = super().form_valid(form)
+
+        self.invalidate_object_cache(self.object)
+
+        view_classes_to_invalidate = [
+            "LeadsListView",
+            "LeadsDetailView",
+            "ADSStatisticsView",
+        ]
+        self.invalidate_view_cache(view_classes_to_invalidate)
+
+        return response
+
 
 class LeadsCreateView(
-    CreateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, CreateView
+    ViewCacheInvalidationMixin,
+    CreateLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    CreateView,
 ):
     """
     Handles creation of new leads.
@@ -104,9 +146,32 @@ class LeadsCreateView(
     form_class: Type[LeadForm] = LeadForm
     success_url: str = reverse_lazy("leads:list")
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """
+        Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+        response = super().form_valid(form)
+
+        self.invalidate_object_cache(self.object)
+
+        self.invalidate_view_cache(["LeadsListView", "ADSStatisticsView"])
+
+        return response
+
 
 class LeadsDeleteView(
-    DeleteLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DeleteView
+    ProtectedErrorMixin,
+    ViewCacheInvalidationMixin,
+    DeleteLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    DeleteView,
 ):
     """
     Handles deletion of leads.
@@ -122,3 +187,21 @@ class LeadsDeleteView(
     model: Type[Lead] = Lead
     template_name: str = "leads/leads-delete.html"
     success_url: str = reverse_lazy("leads:list")
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """
+        Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+
+        self.invalidate_object_cache(self.get_object())
+
+        self.invalidate_view_cache(["LeadsListView", "ADSStatisticsView"])
+        response = super().form_valid(form)
+
+        return response

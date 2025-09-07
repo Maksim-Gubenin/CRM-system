@@ -1,6 +1,8 @@
 from typing import Any, Type
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.forms import BaseModelForm
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -12,18 +14,24 @@ from django.views.generic import (
 
 from contracts.forms import ContractForm
 from contracts.models import Contract
+from crm.cache import ViewCacheInvalidationMixin, ViewCacheMixin
 from crm.mixins import (
     CreateLoggingMixin,
     DeleteLoggingMixin,
     DetailLoggingMixin,
     ListLoggingMixin,
     PerformanceLoggingMixin,
+    ProtectedErrorMixin,
     UpdateLoggingMixin,
 )
 
 
 class ContractsListView(
-    ListLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, ListView
+    ViewCacheMixin,
+    ListLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    ListView,
 ):
     """
     Displays a paginated list of all contracts.
@@ -62,7 +70,12 @@ class ContractsDetailView(
 
 
 class ContractsUpdateView(
-    UpdateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, UpdateView
+    ViewCacheInvalidationMixin,
+    ViewCacheMixin,
+    UpdateLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    UpdateView,
 ):
     """
     Handles editing of an existing contract.
@@ -83,9 +96,36 @@ class ContractsUpdateView(
         """Returns URL to redirect to after successful update."""
         return self.object.get_absolute_url()
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+
+        response = super().form_valid(form)
+
+        self.invalidate_object_cache(self.object)
+
+        view_classes_to_invalidate = [
+            "ContractsListView",
+            "ContractsDetailView",
+            "ADSStatisticsView",
+        ]
+        self.invalidate_view_cache(view_classes_to_invalidate)
+
+        return response
+
 
 class ContractsCreateView(
-    CreateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, CreateView
+    ViewCacheInvalidationMixin,
+    CreateLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    CreateView,
 ):
     """
     Handles creation of new contracts.
@@ -104,9 +144,32 @@ class ContractsCreateView(
     form_class: Type[ContractForm] = ContractForm
     success_url: str = reverse_lazy("contracts:list")
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+
+        response = super().form_valid(form)
+
+        self.invalidate_object_cache(self.object)
+
+        self.invalidate_view_cache(["ContractsListView", "ADSStatisticsView"])
+
+        return response
+
 
 class ContractDeleteView(
-    DeleteLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DeleteView
+    ProtectedErrorMixin,
+    ViewCacheInvalidationMixin,
+    DeleteLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    DeleteView,
 ):
     """
     Handles deletion of contracts.
@@ -122,3 +185,19 @@ class ContractDeleteView(
     model: Type[Contract] = Contract
     template_name: str = "contracts/contracts-delete.html"
     success_url: str = reverse_lazy("contracts:list")
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+
+        self.invalidate_object_cache(self.get_object())
+        self.invalidate_view_cache(["ContractsListView", "ADSStatisticsView"])
+
+        response = super().form_valid(form)
+        return response

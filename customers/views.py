@@ -1,6 +1,8 @@
 from typing import Any, Type
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.forms import BaseModelForm
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -10,21 +12,21 @@ from django.views.generic import (
     UpdateView,
 )
 
+from crm.cache import ViewCacheInvalidationMixin, ViewCacheMixin
 from crm.mixins import (
     CreateLoggingMixin,
     DeleteLoggingMixin,
     DetailLoggingMixin,
     ListLoggingMixin,
     PerformanceLoggingMixin,
+    ProtectedErrorMixin,
     UpdateLoggingMixin,
 )
 from customers.forms import CustomerForm
 from customers.models import Customer
 
 
-class CustomersListView(
-    ListLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, ListView
-):
+class CustomersListView(ListLoggingMixin, PermissionRequiredMixin, ListView):
     """
     Displays a paginated list of all active customers.
 
@@ -45,7 +47,11 @@ class CustomersListView(
 
 
 class CustomersDetailView(
-    DetailLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DetailView
+    DetailLoggingMixin,
+    PerformanceLoggingMixin,
+    ViewCacheMixin,
+    PermissionRequiredMixin,
+    DetailView,
 ):
     """
     Displays detailed information about a single customer.
@@ -62,7 +68,11 @@ class CustomersDetailView(
 
 
 class CustomersUpdateView(
-    UpdateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, UpdateView
+    ViewCacheInvalidationMixin,
+    UpdateLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    UpdateView,
 ):
     """
     Handles editing of an existing customer.
@@ -83,9 +93,36 @@ class CustomersUpdateView(
         """Returns URL to redirect to after successful update."""
         return self.object.get_absolute_url()
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+
+        response = super().form_valid(form)
+
+        self.invalidate_object_cache(self.object)
+
+        view_classes_to_invalidate = [
+            "CustomersListView",
+            "CustomersDetailView",
+            "ADSStatisticsView",
+        ]
+        self.invalidate_view_cache(view_classes_to_invalidate)
+
+        return response
+
 
 class CustomersCreateView(
-    CreateLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, CreateView
+    ViewCacheInvalidationMixin,
+    CreateLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    CreateView,
 ):
     """
     Handles creation of new customers.
@@ -104,9 +141,32 @@ class CustomersCreateView(
     form_class: Type[CustomerForm] = CustomerForm
     success_url: str = reverse_lazy("customers:list")
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+
+        response = super().form_valid(form)
+
+        self.invalidate_object_cache(self.object)
+
+        self.invalidate_view_cache(["CustomersListView", "ADSStatisticsView"])
+
+        return response
+
 
 class CustomersDeleteView(
-    DeleteLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DeleteView
+    ProtectedErrorMixin,
+    ViewCacheInvalidationMixin,
+    DeleteLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    DeleteView,
 ):
     """
     Handles deletion of customers.
@@ -122,3 +182,20 @@ class CustomersDeleteView(
     model: Type[Customer] = Customer
     template_name: str = "customers/customers-delete.html"
     success_url: str = reverse_lazy("customers:list")
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+
+        self.invalidate_object_cache(self.get_object())
+        self.invalidate_view_cache(["CustomersListView", "ADSStatisticsView"])
+
+        response = super().form_valid(form)
+
+        return response
