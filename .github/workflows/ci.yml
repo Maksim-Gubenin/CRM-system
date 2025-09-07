@@ -26,10 +26,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          poetry install --no-interaction --with dev --no-cache
-
-      - name: Verify pylint-django installation
-        run: poetry run python -c "import pylint_django; print('pylint-django installed successfully')"
+          poetry install --no-interaction --with dev
 
       - name: Run Black
         run: poetry run black --check .
@@ -66,9 +63,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          poetry install --no-interaction --with dev --no-cache
+          poetry install --no-interaction --with dev
 
       - name: Run Django tests with coverage
         run: |
-          poetry run coverage run --source=. manage.py test
+          poetry run coverage run --source=. manage.py test --verbosity=2
           poetry run coverage report --fail-under=80
