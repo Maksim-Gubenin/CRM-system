@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from crm.utils.factories import ContractFactory, LeadFactory
+from crm.utils.factories import ContractFactory, CustomerFactory, LeadFactory
 from customers.forms import CustomerForm
 from customers.models import Customer
 
@@ -143,6 +143,84 @@ class CustomerFormTest(TestCase):
         contracts = list(form.fields["contract"].queryset)
         self.assertTrue(len(contracts) > 0)
 
+    def test_form_init_with_none_instance(self) -> None:
+        """Test form initialization with None instance."""
+        form = CustomerForm(instance=None)
+        self.assertIsNotNone(form)
+        self.assertEqual(form.fields["lead"].queryset.count(), 1)
+        self.assertEqual(form.fields["contract"].queryset.count(), 1)
+
+    def test_form_init_with_new_instance_no_pk(self) -> None:
+        """Test form initialization with new instance (no pk)."""
+        new_customer = Customer(lead=None, contract=None)
+        form = CustomerForm(instance=new_customer)
+
+        self.assertEqual(form.fields["lead"].queryset.count(), 1)
+        self.assertEqual(form.fields["contract"].queryset.count(), 1)
+        self.assertIn(self.available_lead, form.fields["lead"].queryset)
+        self.assertIn(self.available_contract, form.fields["contract"].queryset)
+
+    def test_form_with_current_assigned_objects_during_update(self) -> None:
+        """Test that form allows keeping currently assigned objects during update."""
+        form_data = {
+            "lead": self.taken_lead.pk,
+            "contract": self.taken_contract.pk,
+        }
+        form = CustomerForm(data=form_data, instance=self.existing_customer)
+
+        self.assertTrue(form.is_valid(), form.errors)
+        updated_customer = form.save()
+
+        self.assertEqual(updated_customer.lead, self.taken_lead)
+        self.assertEqual(updated_customer.contract, self.taken_contract)
+
+
+class CustomerFormEdgeCasesTest(TestCase):
+    """Test edge cases for CustomerForm."""
+
+    def test_multiple_available_objects(self) -> None:
+        """Test form with multiple available objects."""
+        lead1 = LeadFactory()
+        lead2 = LeadFactory()
+        contract1 = ContractFactory()
+        contract2 = ContractFactory()
+
+        form = CustomerForm()
+
+        self.assertEqual(form.fields["lead"].queryset.count(), 2)
+        self.assertEqual(form.fields["contract"].queryset.count(), 2)
+        self.assertIn(lead1, form.fields["lead"].queryset)
+        self.assertIn(lead2, form.fields["lead"].queryset)
+        self.assertIn(contract1, form.fields["contract"].queryset)
+        self.assertIn(contract2, form.fields["contract"].queryset)
+
+    def test_no_available_objects(self) -> None:
+        """Test form when no objects are available."""
+        lead = LeadFactory()
+        contract = ContractFactory()
+        CustomerFactory(lead=lead, contract=contract)
+
+        form = CustomerForm()
+
+        self.assertEqual(form.fields["lead"].queryset.count(), 0)
+        self.assertEqual(form.fields["contract"].queryset.count(), 0)
+
+    def test_form_with_existing_customer_and_available_objects(self) -> None:
+        """Test form with existing customer when other objects become available."""
+        customer = CustomerFactory()
+
+        available_lead = LeadFactory()
+        available_contract = ContractFactory()
+
+        form = CustomerForm(instance=customer)
+
+        self.assertEqual(form.fields["lead"].queryset.count(), 2)
+        self.assertEqual(form.fields["contract"].queryset.count(), 2)
+        self.assertIn(customer.lead, form.fields["lead"].queryset)
+        self.assertIn(available_lead, form.fields["lead"].queryset)
+        self.assertIn(customer.contract, form.fields["contract"].queryset)
+        self.assertIn(available_contract, form.fields["contract"].queryset)
+
 
 class CustomerFormIntegrationTest(TestCase):
     """Integration tests for CustomerForm with model."""
@@ -168,3 +246,22 @@ class CustomerFormIntegrationTest(TestCase):
         form2 = CustomerForm()
         self.assertNotIn(self.lead1, form2.fields["lead"].queryset)
         self.assertNotIn(self.contract1, form2.fields["contract"].queryset)
+
+    def test_form_queryset_filtering_after_creation(self) -> None:
+        """Test that form properly filters querysets after customer creation."""
+
+        lead1 = LeadFactory()
+        lead2 = LeadFactory()
+        contract1 = ContractFactory()
+        contract2 = ContractFactory()
+
+        CustomerFactory(lead=lead1, contract=contract1)
+
+        form = CustomerForm()
+
+        self.assertEqual(form.fields["lead"].queryset.count(), 1)
+        self.assertEqual(form.fields["contract"].queryset.count(), 1)
+        self.assertIn(lead2, form.fields["lead"].queryset)
+        self.assertIn(contract2, form.fields["contract"].queryset)
+        self.assertNotIn(lead1, form.fields["lead"].queryset)
+        self.assertNotIn(contract1, form.fields["contract"].queryset)
