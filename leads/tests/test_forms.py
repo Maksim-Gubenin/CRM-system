@@ -1,6 +1,5 @@
 from django import forms
 from django.test import TestCase
-from django.utils.translation import gettext_lazy as _
 
 from crm.utils.factories import AdvertisementFactory, LeadFactory
 from leads.forms import LeadForm
@@ -59,27 +58,25 @@ class LeadFormTest(TestCase):
         """Test form field labels."""
         form = LeadForm()
 
-        self.assertEqual(form.fields["first_name"].label, _("First name"))
-        self.assertEqual(form.fields["last_name"].label, _("Last name"))
-        self.assertEqual(form.fields["middle_name"].label, _("Middle name"))
-        self.assertEqual(form.fields["phone"].label, _("Phone number"))
-        self.assertEqual(form.fields["email"].label, _("Email address"))
-        self.assertEqual(
-            form.fields["advertisement"].label, _("Advertisement campaign")
-        )
+        self.assertEqual(form.fields["first_name"].label, "First name")
+        self.assertEqual(form.fields["last_name"].label, "Last name")
+        self.assertEqual(form.fields["middle_name"].label, "Middle name")
+        self.assertEqual(form.fields["phone"].label, "Phone number")
+        self.assertEqual(form.fields["email"].label, "Email address")
+        self.assertEqual(form.fields["advertisement"].label, "Advertisement campaign")
 
     def test_form_help_texts(self) -> None:
         """Test form field help texts."""
         form = LeadForm()
 
-        self.assertEqual(form.fields["first_name"].help_text, _(""))
-        self.assertEqual(form.fields["last_name"].help_text, _(""))
-        self.assertEqual(form.fields["middle_name"].help_text, _("(optional)"))
-        self.assertEqual(form.fields["phone"].help_text, _(""))
-        self.assertEqual(form.fields["email"].help_text, _(""))
+        self.assertEqual(form.fields["first_name"].help_text, "")
+        self.assertEqual(form.fields["last_name"].help_text, "")
+        self.assertEqual(form.fields["middle_name"].help_text, "(optional)")
+        self.assertEqual(form.fields["phone"].help_text, "")
+        self.assertEqual(form.fields["email"].help_text, "")
         self.assertEqual(
             form.fields["advertisement"].help_text,
-            _("Select related advertisement campaign"),
+            "Select related advertisement campaign",
         )
 
     def test_form_fields_widgets(self) -> None:

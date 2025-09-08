@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-30 08:34+0000\n"
+"POT-Creation-Date: 2025-09-08 08:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,157 +19,157 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>20) ? 1 : 2);\n"
 
-#: advertisements/forms.py:38
+#: forms.py:38 tests/test_forms.py:43
 msgid "Name"
 msgstr "Название"
 
-#: advertisements/forms.py:39
+#: forms.py:39 tests/test_forms.py:44
 msgid "Channel"
 msgstr "Канал продвижения"
 
-#: advertisements/forms.py:40
+#: forms.py:40 tests/test_forms.py:45
 msgid "Price"
 msgstr "Цена"
 
-#: advertisements/forms.py:41 advertisements/models.py:82
+#: forms.py:41 models.py:83 tests/test_forms.py:46 tests/test_models.py:166
 msgid "Product"
 msgstr "Услуга"
 
-#: advertisements/forms.py:45
+#: forms.py:45 tests/test_forms.py:51
 msgid "Enter the Advertisement name"
 msgstr "Введите название рекламной услуги"
 
-#: advertisements/forms.py:46
+#: forms.py:46 tests/test_forms.py:52
 msgid "Indicate the promotion channel"
 msgstr "Укажите канал продвижения"
 
-#: advertisements/forms.py:47
+#: forms.py:47 tests/test_forms.py:53
 msgid "Enter price in USD"
 msgstr "Введите стоимость в у.е."
 
-#: advertisements/forms.py:48
+#: forms.py:48 tests/test_forms.py:54
 msgid "Select a product/service for an advertising campaign"
 msgstr "Выберите продукт/услугу для рекламной кампании"
 
-#: advertisements/models.py:35
+#: models.py:35 tests/test_models.py:35
 msgid "Advertisement"
 msgstr "Рекламная услуга"
 
-#: advertisements/models.py:36
+#: models.py:36 tests/test_models.py:36
 msgid "Advertisements"
 msgstr "Рекламные услуги"
 
-#: advertisements/models.py:50
+#: models.py:50
 msgid "Social Media"
 msgstr "Социальные сети"
 
-#: advertisements/models.py:51
+#: models.py:51
 msgid "Search Engines"
 msgstr "Поисковые системы"
 
-#: advertisements/models.py:52
+#: models.py:52
 msgid "Context Ads"
 msgstr "Контекстная реклама"
 
-#: advertisements/models.py:53
+#: models.py:53
 msgid "Email Marketing"
 msgstr "Электронный маркетинг"
 
-#: advertisements/models.py:54
+#: models.py:54
 msgid "Other"
 msgstr "Другой"
 
-#: advertisements/models.py:59
+#: models.py:59 tests/test_models.py:163
 msgid "Campaign name"
 msgstr "Название компании"
 
-#: advertisements/models.py:60
+#: models.py:60
 msgid "Name of the advertising campaign"
 msgstr "Название рекламной кампании"
 
-#: advertisements/models.py:67
+#: models.py:68 tests/test_models.py:164
 msgid "Advertising channel"
 msgstr "Рекламный канал"
 
-#: advertisements/models.py:68
+#: models.py:69
 msgid "Primary advertising channel"
 msgstr "Основной рекламный канал"
 
-#: advertisements/models.py:76
+#: models.py:76 tests/test_models.py:165
 msgid "Budget"
 msgstr "Бюджет"
 
-#: advertisements/models.py:77
+#: models.py:77
 msgid "Total budget for the campaign"
 msgstr "Общий бюджет кампании"
 
-#: advertisements/models.py:83
+#: models.py:84
 msgid "Product being advertised"
 msgstr "Рекламируемый продукт"
 
-#: advertisements/models.py:88
+#: models.py:89 tests/test_models.py:167
 msgid "Active"
 msgstr "Активно"
 
-#: advertisements/models.py:89
+#: models.py:90
 msgid "Is campaign currently active"
 msgstr "Активна ли кампания в настоящее время"
 
-#: advertisements/templates/advertisements/ads-create.html:5
+#: templates/advertisements/ads-create.html:5
 msgid "Create advertisement"
 msgstr "Создание рекламной компании"
 
-#: advertisements/templates/advertisements/ads-create.html:12
-#: advertisements/templates/advertisements/ads-list.html:8
+#: templates/advertisements/ads-create.html:12
+#: templates/advertisements/ads-list.html:8
 msgid "Create"
 msgstr "Создать"
 
-#: advertisements/templates/advertisements/ads-delete.html:5
+#: templates/advertisements/ads-delete.html:5
 msgid "Delete advertisement"
 msgstr "Удаление рекламной компании"
 
-#: advertisements/templates/advertisements/ads-delete.html:9
+#: templates/advertisements/ads-delete.html:9
 msgid "Are you sure you want to delete "
 msgstr "Вы уверены что хотите удалить "
 
-#: advertisements/templates/advertisements/ads-delete.html:13
-#: advertisements/templates/advertisements/ads-list.html:16
+#: templates/advertisements/ads-delete.html:13
+#: templates/advertisements/ads-list.html:16
 msgid "Delete"
 msgstr "Удалить"
 
-#: advertisements/templates/advertisements/ads-delete.html:14
+#: templates/advertisements/ads-delete.html:14
 msgid "Cancel"
 msgstr "Отмена"
 
-#: advertisements/templates/advertisements/ads-detail.html:5
+#: templates/advertisements/ads-detail.html:5
 msgid "Detailed information about the advertising campaign"
 msgstr "Детальная информация о рекламной компании"
 
-#: advertisements/templates/advertisements/ads-detail.html:13
+#: templates/advertisements/ads-detail.html:13
 msgid "USD"
 msgstr "у.е."
 
-#: advertisements/templates/advertisements/ads-detail.html:15
+#: templates/advertisements/ads-detail.html:15
 msgid "Edit"
 msgstr "Редактировать"
 
-#: advertisements/templates/advertisements/ads-detail.html:16
+#: templates/advertisements/ads-detail.html:16
 msgid "Back to list"
 msgstr "Назад к списку"
 
-#: advertisements/templates/advertisements/ads-list.html:5
+#: templates/advertisements/ads-list.html:5
 msgid "Advertising companies"
 msgstr "Рекламные компании"
 
-#: advertisements/templates/advertisements/ads-list.html:9
+#: templates/advertisements/ads-list.html:9
 msgid "Statistics"
 msgstr "Статистика"
 
-#: advertisements/templates/advertisements/ads-statistic.html:5
+#: templates/advertisements/ads-statistic.html:5
 msgid "Advertising campaign statistics"
 msgstr "Рекламные компании"
 
-#: advertisements/templates/advertisements/ads-statistic.html:13
+#: templates/advertisements/ads-statistic.html:13
 #, python-format
 msgid ""
 "\n"
@@ -192,7 +192,7 @@ msgstr[2] ""
 "                        %(leads_count)s лидов\n"
 "                    "
 
-#: advertisements/templates/advertisements/ads-statistic.html:19
+#: templates/advertisements/ads-statistic.html:19
 #, python-format
 msgid ""
 "\n"
@@ -215,14 +215,14 @@ msgstr[2] ""
 "                        %(customers_count)s активных клиентов\n"
 "                    "
 
-#: advertisements/templates/advertisements/ads-statistic.html:25
+#: templates/advertisements/ads-statistic.html:25
 msgid "Contract to cost ratio"
 msgstr "Соотношение контракта и стоимости"
 
-#: advertisements/templates/advertisements/ads-update.html:5
+#: templates/advertisements/ads-update.html:5
 msgid "Editing an advertising campaign"
 msgstr "Редактирование рекламной кампании"
 
-#: advertisements/templates/advertisements/ads-update.html:12
+#: templates/advertisements/ads-update.html:12
 msgid "Apply"
 msgstr "Применить"

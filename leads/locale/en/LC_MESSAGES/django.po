@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: leads/forms.py:46 leads/forms.py:47 leads/forms.py:49 leads/forms.py:50
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-30 08:34+0000\n"
+"POT-Creation-Date: 2025-09-08 08:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,120 +18,118 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: leads/forms.py:37 leads/models.py:40
+#: forms.py:37 models.py:40 tests/test_models.py:47
 msgid "First name"
 msgstr "First name"
 
-#: leads/forms.py:38 leads/models.py:45
+#: forms.py:38 models.py:45 tests/test_models.py:54
 msgid "Last name"
 msgstr "Last name"
 
-#: leads/forms.py:39 leads/models.py:52
+#: forms.py:39 models.py:52 tests/test_models.py:61
 msgid "Middle name"
 msgstr "Middle name"
 
-#: leads/forms.py:40 leads/models.py:58
+#: forms.py:40 models.py:58 tests/test_models.py:70
 msgid "Phone number"
 msgstr "Phone number"
 
-#: leads/forms.py:41
+#: forms.py:41
 msgid "Email address"
 msgstr "Email address"
 
-#: leads/forms.py:42
+#: forms.py:42
 msgid "Advertisement campaign"
 msgstr "Advertisement campaign"
 
-#: leads/forms.py:48
+#: forms.py:46
 msgid "(optional)"
 msgstr "(optional)"
 
-#: leads/forms.py:51
+#: forms.py:47
 msgid "Select related advertisement campaign"
 msgstr "Select related advertisement campaign"
 
-#: leads/models.py:29
+#: models.py:29 tests/test_models.py:36
 msgid "Lead"
 msgstr "Lead"
 
-#: leads/models.py:30 leads/templates/leads/leads-list.html:5
+#: models.py:30 templates/leads/leads-list.html:5 tests/test_models.py:37
 msgid "Leads"
 msgstr "Leads"
 
-#: leads/models.py:41
+#: models.py:41
 msgid "The lead's first name (max 100 characters)"
 msgstr "The lead's first name (max 100 characters)"
 
-#: leads/models.py:46
+#: models.py:46
 msgid "The lead's last name (max 100 characters)"
 msgstr "The lead's last name (max 100 characters"
 
-#: leads/models.py:53
+#: models.py:53
 msgid "The lead's middle name (optional, max 100 characters)"
 msgstr "The lead's middle name (optional, max 100 characters)"
 
-#: leads/models.py:59
+#: models.py:59
 msgid "Contact phone number (max 20 characters)"
 msgstr "Contact phone number (max 20 characters)"
 
-#: leads/models.py:64
+#: models.py:64 tests/test_models.py:77
 msgid "Email"
 msgstr "Email"
 
-#: leads/models.py:65
+#: models.py:65
 msgid "Valid email address"
 msgstr "Valid email address"
 
-#: leads/models.py:71
+#: models.py:71 tests/test_models.py:85
 msgid "Advertisement"
 msgstr "Advertisement"
 
-#: leads/models.py:72
+#: models.py:72
 msgid "Related advertisement campaign (optional)"
 msgstr "Related advertisement campaign"
 
-#: leads/templates/leads/leads-create.html:5
+#: templates/leads/leads-create.html:5
 msgid "Lead creating"
 msgstr "Lead creating"
 
-#: leads/templates/leads/leads-create.html:12
-#: leads/templates/leads/leads-list.html:8
+#: templates/leads/leads-create.html:12 templates/leads/leads-list.html:8
 msgid "Create"
 msgstr "Create"
 
-#: leads/templates/leads/leads-delete.html:5
+#: templates/leads/leads-delete.html:5
 msgid "Lead removal"
 msgstr "Lead removal"
 
-#: leads/templates/leads/leads-delete.html:9
+#: templates/leads/leads-delete.html:9
 msgid "Are you sure you want to delete "
 msgstr "Are you sure you want to delete "
 
-#: leads/templates/leads/leads-delete.html:13
-#: leads/templates/leads/leads-list.html:15
+#: templates/leads/leads-delete.html:13 templates/leads/leads-list.html:15
 msgid "Delete"
 msgstr "Delete"
 
-#: leads/templates/leads/leads-delete.html:14
+#: templates/leads/leads-delete.html:14
 msgid "Cancel"
 msgstr "Cancel"
 
-#: leads/templates/leads/leads-detail.html:5
+#: templates/leads/leads-detail.html:5
 msgid "Lead detail information"
 msgstr "Lead detail information"
 
-#: leads/templates/leads/leads-detail.html:17
+#: templates/leads/leads-detail.html:17
 msgid "Edit"
 msgstr "Edit"
 
-#: leads/templates/leads/leads-detail.html:18
+#: templates/leads/leads-detail.html:18
 msgid "Back to list"
 msgstr "Back to list"
 
-#: leads/templates/leads/leads-update.html:5
+#: templates/leads/leads-update.html:5
 msgid "Lead editing"
 msgstr "Lead editing"
 
-#: leads/templates/leads/leads-update.html:12
+#: templates/leads/leads-update.html:12
 msgid "Apply"
 msgstr "Apply"

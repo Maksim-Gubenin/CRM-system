@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-30 08:34+0000\n"
+"POT-Creation-Date: 2025-09-08 08:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,120 +18,121 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: contracts/forms.py:40 contracts/models.py:37
+#: forms.py:40 models.py:37 tests/test_models.py:48
 msgid "Contract name"
 msgstr "Contract name"
 
-#: contracts/forms.py:41 contracts/models.py:44
+#: forms.py:41 models.py:44 tests/test_models.py:54
 msgid "Product"
 msgstr "Product"
 
-#: contracts/forms.py:42 contracts/models.py:55
+#: forms.py:42 models.py:55 tests/test_models.py:62
 msgid "Document"
 msgstr "Document"
 
-#: contracts/forms.py:43 contracts/models.py:60
+#: forms.py:43 models.py:60 tests/test_models.py:69
 msgid "Start date"
 msgstr "Start date"
 
-#: contracts/forms.py:44 contracts/models.py:65
+#: forms.py:44 models.py:65 tests/test_models.py:75
 msgid "End date"
 msgstr "End date"
 
-#: contracts/forms.py:45 contracts/models.py:75
+#: forms.py:45 models.py:75 tests/test_models.py:83
 msgid "Cost"
 msgstr "Cost"
 
-#: contracts/forms.py:49 contracts/models.py:38
+#: forms.py:49 models.py:38
 msgid "Official contract reference number/name"
 msgstr "Official contract reference number/name"
 
-#: contracts/forms.py:50 contracts/models.py:45
+#: forms.py:50 models.py:45
 msgid "Service/product covered by this contract"
 msgstr "Service/product covered by this contract"
 
-#: contracts/forms.py:51 contracts/models.py:56
+#: forms.py:51 models.py:56
 msgid "Scanned contract file (PDF or Word)"
 msgstr "Scanned contract file (PDF or Word)"
 
-#: contracts/forms.py:52 contracts/models.py:61
+#: forms.py:52 models.py:61
 msgid "Service start date"
 msgstr "Service start date"
 
-#: contracts/forms.py:53 contracts/models.py:66
+#: forms.py:53 models.py:66
 msgid "Service end date"
 msgstr "Service end date"
 
-#: contracts/forms.py:54 contracts/models.py:76
+#: forms.py:54 models.py:76
 msgid "Total contract value"
 msgstr "Total contract value"
 
-#: contracts/models.py:31
+#: models.py:31 tests/test_models.py:37
 msgid "Contract"
 msgstr "Contract"
 
-#: contracts/models.py:32 contracts/templates/contracts/contracts-list.html:5
+#: models.py:32 templates/contracts/contracts-list.html:5
+#: tests/test_models.py:38
 msgid "Contracts"
 msgstr "Contracts"
 
-#: contracts/models.py:88
+#: models.py:88 tests/test_models.py:106
 msgid "End date cannot be earlier than start date"
 msgstr "End date cannot be earlier than start date"
 
-#: contracts/templates/contracts/contracts-create.html:5
+#: templates/contracts/contracts-create.html:5
 msgid "Creating a contract"
 msgstr "Creating a contract"
 
-#: contracts/templates/contracts/contracts-create.html:14
-#: contracts/templates/contracts/contracts-list.html:8
+#: templates/contracts/contracts-create.html:14
+#: templates/contracts/contracts-list.html:8
 msgid "Create"
 msgstr "Create"
 
-#: contracts/templates/contracts/contracts-delete.html:5
+#: templates/contracts/contracts-delete.html:5
 msgid "Deleting a contract"
 msgstr "Deleting a contract"
 
-#: contracts/templates/contracts/contracts-delete.html:9
+#: templates/contracts/contracts-delete.html:9
 msgid "Are you sure you want to delete "
 msgstr "Are you sure you want to delete "
 
-#: contracts/templates/contracts/contracts-delete.html:13
-#: contracts/templates/contracts/contracts-list.html:15
+#: templates/contracts/contracts-delete.html:13
+#: templates/contracts/contracts-list.html:15
 msgid "Delete"
 msgstr "Delete"
 
-#: contracts/templates/contracts/contracts-delete.html:14
+#: templates/contracts/contracts-delete.html:14
 msgid "Cancel"
 msgstr "Cancel"
 
-#: contracts/templates/contracts/contracts-detail.html:5
+#: templates/contracts/contracts-detail.html:5
 msgid "Detailed information about the contract"
 msgstr "Detailed information about the contract"
 
-#: contracts/templates/contracts/contracts-detail.html:12
+#: templates/contracts/contracts-detail.html:12
 msgid "from"
 msgstr "from"
 
-#: contracts/templates/contracts/contracts-detail.html:12
+#: templates/contracts/contracts-detail.html:12
 msgid "to"
 msgstr "to"
 
-#: contracts/templates/contracts/contracts-detail.html:13
+#: templates/contracts/contracts-detail.html:13
 msgid "USD"
 msgstr "USD"
 
-#: contracts/templates/contracts/contracts-detail.html:15
+#: templates/contracts/contracts-detail.html:15
 msgid "Edit"
 msgstr "Edit"
 
-#: contracts/templates/contracts/contracts-detail.html:16
+#: templates/contracts/contracts-detail.html:16
 msgid "Back to list"
 msgstr "Back to list"
 
-#: contracts/templates/contracts/contracts-update.html:5
+#: templates/contracts/contracts-update.html:5
 msgid "Editing a contract"
 msgstr "Editing a contract"
 
-#: contracts/templates/contracts/contracts-update.html:14
+#: templates/contracts/contracts-update.html:14
 msgid "Apply"
 msgstr "Apply"

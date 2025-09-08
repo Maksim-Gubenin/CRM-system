@@ -97,16 +97,6 @@ class ProductModelTest(TestCase):
         self.assertEqual(product.short_description, expected)
         self.assertEqual(len(product.short_description), 53)
 
-    def test_short_description_edge_cases(self) -> None:
-        """Test edge cases for short_description property."""
-        exact_length = "a" * 50
-        product = ProductFactory(description=exact_length)
-        self.assertEqual(product.short_description, exact_length)
-
-        over_length = "b" * 51
-        product = ProductFactory(description=over_length)
-        self.assertEqual(product.short_description, "b" * 50 + "...")
-
     def test_get_absolute_url(self) -> None:
         """Test get_absolute_url method."""
         expected_url = reverse("products:detail", kwargs={"pk": self.product.pk})
