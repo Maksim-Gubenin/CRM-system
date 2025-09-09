@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-30 08:34+0000\n"
+"POT-Creation-Date: 2025-09-08 08:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,28 +19,38 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-#: crm/forms.py:19
+
+#: forms.py:19 tests/test_forms.py:38
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: crm/forms.py:24
+#: forms.py:24 tests/test_forms.py:47
 msgid "Password"
 msgstr "Пароль"
 
-#: crm/models.py:18
+#: mixins.py:336
+#, python-format
+msgid ""
+"Cannot delete '%(object_name)s' because it is linked to other objects: "
+"%(details)s. Please remove or reassign these objects first."
+msgstr ""
+"Невозможно удалить объект '%(object_name)s' так как он связан с другими объектами: "
+"%(details)s. Сначала удалите или переназначьте эти объекты."
+
+#: models.py:28
 msgid "Created at"
 msgstr "Создан"
 
-#: crm/models.py:19
+#: models.py:29
 #, python-format
 msgid "When the %(class)s was created"
 msgstr "Когда %(class)s был создан"
 
-#: crm/models.py:24
+#: models.py:34
 msgid "Updated at"
 msgstr "Обновлён"
 
-#: crm/models.py:25
+#: models.py:35
 #, python-format
 msgid "When the %(class)s was last updated"
 msgstr "Когда %(class)s был обновлён"

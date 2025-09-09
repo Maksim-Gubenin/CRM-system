@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-30 08:34+0000\n"
+"POT-Creation-Date: 2025-09-08 08:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,120 +18,120 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: products/forms.py:25 products/models.py:40
+#: forms.py:25 models.py:40 tests/test_models.py:50 tests/test_models.py:197
 msgid "Name"
 msgstr "Name"
 
-#: products/forms.py:26 products/models.py:46
+#: forms.py:26 models.py:46 tests/test_models.py:56 tests/test_models.py:198
 msgid "Description"
 msgstr "Description"
 
-#: products/forms.py:27
+#: forms.py:27
 msgid "Price"
 msgstr "Price"
 
-#: products/forms.py:31
+#: forms.py:31
 msgid "Enter the product/service name"
 msgstr "Enter the product/service name"
 
-#: products/forms.py:32
+#: forms.py:32
 msgid "Enter detailed description"
 msgstr "Enter detailed description"
 
-#: products/forms.py:33
+#: forms.py:33
 msgid "Enter price in USD"
 msgstr "Enter price in USD"
 
-#: products/models.py:30 products/tests/test_models.py:66
+#: models.py:30 tests/test_models.py:39
 msgid "Product"
 msgstr "Product"
 
-#: products/models.py:31 products/tests/test_models.py:67
+#: models.py:31 tests/test_models.py:40
 msgid "Products"
 msgstr "Products"
 
-#: products/models.py:41
+#: models.py:41
 msgid "Official name of the service/product"
 msgstr "Official name of the service/product"
 
-#: products/models.py:47
+#: models.py:47
 msgid "Detailed description of the service"
 msgstr "Detailed description of the service"
 
-#: products/models.py:52
+#: models.py:52
 msgid "Cost cannot be negative"
 msgstr "Cost cannot be negative"
 
-#: products/models.py:53
+#: models.py:53 tests/test_models.py:66 tests/test_models.py:199
 msgid "Cost"
 msgstr "Cost"
 
-#: products/models.py:54
+#: models.py:54
 msgid "Price in USD"
 msgstr "Price in USD"
 
-#: products/models.py:59
+#: models.py:58 tests/test_models.py:72 tests/test_models.py:200
 msgid "Is active"
 msgstr "Is active"
 
-#: products/models.py:60
+#: models.py:59
 msgid "Is service currently offered"
 msgstr "Is service currently offered"
 
-#: products/models.py:78 products/tests/test_models.py:38
+#: models.py:77 tests/test_models.py:86 tests/test_models.py:247
 msgid "No description"
 msgstr "No description"
 
-#: products/templates/products/products-create.html:5
+#: templates/products/products-create.html:5
 msgid "Create Service"
 msgstr "Create Service"
 
-#: products/templates/products/products-create.html:12
-#: products/templates/products/products-list.html:8
+#: templates/products/products-create.html:12
+#: templates/products/products-list.html:8
 msgid "Create"
 msgstr "Create"
 
-#: products/templates/products/products-delete.html:5
+#: templates/products/products-delete.html:5
 msgid "Delete Service"
 msgstr "Delete Service"
 
-#: products/templates/products/products-delete.html:9
+#: templates/products/products-delete.html:9
 msgid "Are you sure you want to delete "
 msgstr "Are you sure you want to delete "
 
-#: products/templates/products/products-delete.html:13
-#: products/templates/products/products-list.html:15
+#: templates/products/products-delete.html:13
+#: templates/products/products-list.html:15
 msgid "Delete"
 msgstr "Delete"
 
-#: products/templates/products/products-delete.html:14
+#: templates/products/products-delete.html:14
 msgid "Cancel"
 msgstr "Cancel"
 
-#: products/templates/products/products-detail.html:5
+#: templates/products/products-detail.html:5
 msgid "Service Details"
 msgstr "Service Details"
 
-#: products/templates/products/products-detail.html:16
+#: templates/products/products-detail.html:16
 msgid "USD"
 msgstr "USD"
 
-#: products/templates/products/products-detail.html:19
+#: templates/products/products-detail.html:19
 msgid "Edit"
 msgstr "Edit"
 
-#: products/templates/products/products-detail.html:20
+#: templates/products/products-detail.html:20
 msgid "Back to list"
 msgstr "Back to list"
 
-#: products/templates/products/products-list.html:5
+#: templates/products/products-list.html:5
 msgid "Service"
 msgstr "Service"
 
-#: products/templates/products/products-update.html:5
+#: templates/products/products-update.html:5
 msgid "Edit Service"
 msgstr "Edit Service"
 
-#: products/templates/products/products-update.html:14
+#: templates/products/products-update.html:14
 msgid "Apply Changes"
 msgstr "Apply"

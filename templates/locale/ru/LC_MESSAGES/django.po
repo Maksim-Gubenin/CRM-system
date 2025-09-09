@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-30 08:34+0000\n"
+"POT-Creation-Date: 2025-09-08 08:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,59 +20,55 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: config/settings.py:137
-msgid "English"
-msgstr ""
-
-#: config/settings.py:138
-msgid "Russian"
-msgstr ""
-
-#: templates/_base.html:32 templates/login.html:65
+#: _base.html:33 login.html:65
 msgid "CRM BACKOFFICE"
 msgstr "CRM ПАНЕЛЬ УПРАВЛЕНИЯ"
 
-#: templates/_base.html:39
+#: _base.html:40
 msgid "Services"
 msgstr "Услуги"
 
-#: templates/_base.html:44
+#: _base.html:45
 msgid "Advertising campaigns"
 msgstr "Рекламные компании"
 
-#: templates/_base.html:49 templates/index.html:33
+#: _base.html:50
+msgid "Statistics"
+msgstr "Статистика"
+
+#: _base.html:55 index.html:33
 msgid "Leads"
 msgstr "Лиды"
 
-#: templates/_base.html:54
+#: _base.html:60
 msgid "Contracts"
 msgstr "Контракты"
 
-#: templates/_base.html:59 templates/index.html:44
+#: _base.html:65 index.html:44
 msgid "Customers"
 msgstr "Активные клиенты"
 
-#: templates/_base.html:88
+#: _base.html:93
 msgid "Logout"
 msgstr "Выход"
 
-#: templates/index.html:5
+#: index.html:5
 msgid "General statistics"
 msgstr "Общая статистика"
 
-#: templates/index.html:11
+#: index.html:11
 msgid "Products"
 msgstr "Услуги"
 
-#: templates/index.html:22
+#: index.html:22
 msgid "Advertisements"
 msgstr "Рекламные компании"
 
-#: templates/login.html:10
+#: login.html:10
 msgid "CRM - Login"
 msgstr "CRM - Авторизация"
 
-#: templates/login.html:73
+#: login.html:73
 msgid ""
 "Please enter a correct username and password. Note that both fields may be "
 "case-sensitive."
@@ -80,14 +76,14 @@ msgstr ""
 "Пожалуйста, введите правильное имя пользователя и пароль. Обратите внимание, "
 "что оба поля могут быть чувствительны к регистру."
 
-#: templates/login.html:78 templates/login.html:80
+#: login.html:78 login.html:80
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: templates/login.html:85 templates/login.html:87
+#: login.html:85 login.html:87
 msgid "Password"
 msgstr "Пароль"
 
-#: templates/login.html:91
+#: login.html:91
 msgid "Sign In"
 msgstr "Войти"

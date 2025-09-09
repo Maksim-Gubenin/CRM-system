@@ -1,6 +1,8 @@
 from typing import Any, Type
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.forms import BaseModelForm
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -12,9 +14,25 @@ from django.views.generic import (
 
 from contracts.forms import ContractForm
 from contracts.models import Contract
+from crm.cache import ViewCacheInvalidationMixin, ViewCacheMixin
+from crm.mixins import (
+    CreateLoggingMixin,
+    DeleteLoggingMixin,
+    DetailLoggingMixin,
+    ListLoggingMixin,
+    PerformanceLoggingMixin,
+    ProtectedErrorMixin,
+    UpdateLoggingMixin,
+)
 
 
-class ContractsListView(PermissionRequiredMixin, ListView):
+class ContractsListView(
+    ViewCacheMixin,
+    ListLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    ListView,
+):
     """
     Displays a paginated list of all contracts.
 
@@ -34,7 +52,9 @@ class ContractsListView(PermissionRequiredMixin, ListView):
     context_object_name: str = "contracts"
 
 
-class ContractsDetailView(PermissionRequiredMixin, DetailView):
+class ContractsDetailView(
+    DetailLoggingMixin, PerformanceLoggingMixin, PermissionRequiredMixin, DetailView
+):
     """
     Displays detailed information about a single contract.
 
@@ -49,7 +69,14 @@ class ContractsDetailView(PermissionRequiredMixin, DetailView):
     template_name: str = "contracts/contracts-detail.html"
 
 
-class ContractsUpdateView(PermissionRequiredMixin, UpdateView):
+class ContractsUpdateView(
+    ViewCacheInvalidationMixin,
+    ViewCacheMixin,
+    UpdateLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    UpdateView,
+):
     """
     Handles editing of an existing contract.
 
@@ -69,8 +96,37 @@ class ContractsUpdateView(PermissionRequiredMixin, UpdateView):
         """Returns URL to redirect to after successful update."""
         return self.object.get_absolute_url()
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """Handles form validation with cache invalidation.
 
-class ContractsCreateView(PermissionRequiredMixin, CreateView):
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+
+        response = super().form_valid(form)
+
+        self.invalidate_object_cache(self.object)
+
+        view_classes_to_invalidate = [
+            "ContractsListView",
+            "ContractsDetailView",
+            "ADSStatisticsView",
+        ]
+        self.invalidate_view_cache(view_classes_to_invalidate)
+
+        return response
+
+
+class ContractsCreateView(
+    ViewCacheInvalidationMixin,
+    CreateLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    CreateView,
+):
     """
     Handles creation of new contracts.
 
@@ -88,8 +144,33 @@ class ContractsCreateView(PermissionRequiredMixin, CreateView):
     form_class: Type[ContractForm] = ContractForm
     success_url: str = reverse_lazy("contracts:list")
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """Handles form validation with cache invalidation.
 
-class ContractDeleteView(PermissionRequiredMixin, DeleteView):
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+
+        response = super().form_valid(form)
+
+        self.invalidate_object_cache(self.object)
+
+        self.invalidate_view_cache(["ContractsListView", "ADSStatisticsView"])
+
+        return response
+
+
+class ContractDeleteView(
+    ProtectedErrorMixin,
+    ViewCacheInvalidationMixin,
+    DeleteLoggingMixin,
+    PerformanceLoggingMixin,
+    PermissionRequiredMixin,
+    DeleteView,
+):
     """
     Handles deletion of contracts.
 
@@ -104,3 +185,19 @@ class ContractDeleteView(PermissionRequiredMixin, DeleteView):
     model: Type[Contract] = Contract
     template_name: str = "contracts/contracts-delete.html"
     success_url: str = reverse_lazy("contracts:list")
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        """Handles form validation with cache invalidation.
+
+        Args:
+            form: Validated form instance
+
+        Returns:
+            HttpResponse: Response after successful form processing
+        """
+
+        self.invalidate_object_cache(self.get_object())
+        self.invalidate_view_cache(["ContractsListView", "ADSStatisticsView"])
+
+        response = super().form_valid(form)
+        return response

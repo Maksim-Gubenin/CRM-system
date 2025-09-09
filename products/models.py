@@ -53,7 +53,6 @@ class Product(BaseModel):
         verbose_name=_("Cost"),
         help_text=_("Price in USD"),
     )
-
     is_active = models.BooleanField(
         default=True,
         verbose_name=_("Is active"),
@@ -81,6 +80,11 @@ class Product(BaseModel):
             if len(self.description) > 50
             else self.description
         )
+
+    def active_advertisements_count(self) -> Any:
+        """Count of active advertisements for this product"""
+
+        return self.advertisement_set.filter(is_active=True).count()
 
     def get_absolute_url(self) -> Any:
         """Returns the absolute URL of the object."""

@@ -2,6 +2,7 @@ from decimal import Decimal
 from typing import Any, Dict
 
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.test import TestCase, override_settings
 from django.urls import reverse
 
@@ -22,9 +23,18 @@ class ProductsListViewTest(TestCase):
         user (User): Regular user instance
     """
 
+    def setUp(self):
+        """Set up test environment.
+
+        Clears cache before each test to prevent interference from
+        cached data between test runs.
+        """
+        cache.clear()
+
     @classmethod
     def setUpTestData(cls) -> None:
         """Create test data for all test methods."""
+        cache.clear()
         cls.product_active = ProductFactory()
         cls.product_not_active = ProductFactory(is_active=False)
         cls.superuser = UserFactory(is_superuser=True)
@@ -68,6 +78,14 @@ class ProductsDetailViewTest(TestCase):
         superuser (User): Superuser instance
         user (User): Regular user instance
     """
+
+    def setUp(self):
+        """Set up test environment.
+
+        Clears cache before each test to prevent interference from
+        cached data between test runs.
+        """
+        cache.clear()
 
     @classmethod
     def setUpTestData(cls) -> None:

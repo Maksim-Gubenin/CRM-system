@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-30 08:34+0000\n"
+"POT-Creation-Date: 2025-09-08 08:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,80 +20,81 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: customers/forms.py:37 customers/models.py:32
+#: forms.py:37 models.py:32 tests/test_models.py:44
 msgid "Lead"
 msgstr "Лид"
 
-#: customers/forms.py:38 customers/models.py:40
+#: forms.py:38 models.py:40 tests/test_models.py:53
 msgid "Contract"
 msgstr "Контракт"
 
-#: customers/forms.py:42
+#: forms.py:42
 msgid "Select a lead (only available leads are shown)"
 msgstr "Выберите договор (отображаются только доступные договоры)"
 
-#: customers/forms.py:43
+#: forms.py:43
 msgid "Select a contract (only available contracts are shown)"
 msgstr "Выберите договор (отображаются только доступные договоры)"
 
-#: customers/models.py:24
+#: models.py:24 tests/test_models.py:34
 msgid "Customer"
 msgstr "Активный клиент"
 
-#: customers/models.py:25 customers/templates/customers/customers-list.html:5
+#: models.py:25 templates/customers/customers-list.html:5
+#: tests/test_models.py:35
 msgid "Customers"
 msgstr "Активные клиенты"
 
-#: customers/models.py:33
+#: models.py:33
 msgid "Original lead that became a customer"
 msgstr "Первоначальный лид, который стал клиентом"
 
-#: customers/models.py:41
+#: models.py:41
 msgid "Active contract for this customer"
 msgstr "Действующий контракт для этого клиента"
 
-#: customers/templates/customers/customers-create.html:5
+#: templates/customers/customers-create.html:5
 msgid "Creating a customer"
 msgstr "Создание активного клиента"
 
-#: customers/templates/customers/customers-create.html:12
-#: customers/templates/customers/customers-list.html:8
+#: templates/customers/customers-create.html:12
+#: templates/customers/customers-list.html:8
 msgid "Create"
 msgstr "Создать"
 
-#: customers/templates/customers/customers-delete.html:5
+#: templates/customers/customers-delete.html:5
 msgid "Deleting a customers"
 msgstr "Удаление активного клиента"
 
-#: customers/templates/customers/customers-delete.html:9
+#: templates/customers/customers-delete.html:9
 msgid "Are you sure you want to delete "
 msgstr "Вы уверены, что хотите удалить "
 
-#: customers/templates/customers/customers-delete.html:13
-#: customers/templates/customers/customers-list.html:15
+#: templates/customers/customers-delete.html:13
+#: templates/customers/customers-list.html:15
 msgid "Delete"
 msgstr "Удалить"
 
-#: customers/templates/customers/customers-delete.html:14
+#: templates/customers/customers-delete.html:14
 msgid "Cancel"
 msgstr "Отмена"
 
-#: customers/templates/customers/customers-detail.html:5
+#: templates/customers/customers-detail.html:5
 msgid "Detailed information about the customers"
 msgstr "Детальная информация об активном клиенте"
 
-#: customers/templates/customers/customers-detail.html:15
+#: templates/customers/customers-detail.html:15
 msgid "Edit"
 msgstr "Редактировать"
 
-#: customers/templates/customers/customers-detail.html:16
+#: templates/customers/customers-detail.html:16
 msgid "Back to list"
 msgstr "Назад к списку"
 
-#: customers/templates/customers/customers-update.html:5
+#: templates/customers/customers-update.html:5
 msgid "Editing a customer"
 msgstr "Редактирование активного клиента"
 
-#: customers/templates/customers/customers-update.html:12
+#: templates/customers/customers-update.html:12
 msgid "Apply"
 msgstr "Применить"

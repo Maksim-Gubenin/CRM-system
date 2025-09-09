@@ -43,10 +43,6 @@ class LeadForm(forms.ModelForm):
         }
 
         help_texts = {
-            "first_name": _(""),
-            "last_name": _(""),
             "middle_name": _("(optional)"),
-            "phone": _(""),
-            "email": _(""),
             "advertisement": _("Select related advertisement campaign"),
         }
