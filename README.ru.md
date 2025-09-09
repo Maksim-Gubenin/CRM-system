@@ -61,18 +61,18 @@ cp .env.template .env
 
 ### Запустите приложение
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 ### Выполните миграции
 ```bash
-docker-compose exec web python manage.py migrate
+docker compose exec web python manage.py migrate
 ```
 
 
 ### Создайте суперпользователя
 ```bash
-docker-compose exec web python manage.py createsuperuser
+docker compose exec web python manage.py createsuperuser
 ```
 
 
@@ -110,46 +110,52 @@ CSRF_TRUSTED_ORIGINS=http://localhost
 
 ### Создайте суперпользователя
 ```bash
-docker-compose exec web python manage.py createsuperuser
+docker compose exec web python manage.py createsuperuser
 ```
 
 ### Запуск приложения
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 ### Миграции базы данных
 ```bash
-docker-compose exec web python manage.py migrate
+docker compose exec web python manage.py migrate
 ```
+
+### Компиляция сообщений
+```bash
+docker compose exec web python manage.py compilemessages
+```
+
 
 ### Создание администратора
 ```bash
-docker-compose exec web python manage.py createsuperuser
+docker compose exec web python manage.py createsuperuser
 ```
 
 
 ### Сбор статических файлов
 ```bash
-docker-compose exec web python manage.py collectstatic
+docker compose exec web python manage.py collectstatic
 ```
 
-### Сбор статических файлов
+### Запуск оболочки
 ```bash
-docker-compose exec web python manage.py shell
+docker compose exec web python manage.py shell
 ```
 
 ### Просмотр логов
 ```bash
-docker-compose logs web
-docker-compose logs nginx
+docker compose logs web
+docker compose logs nginx
 ```
 
 ## Тестирование
 
 ### Все тесты
 ```bash
-docker-compose exec web python manage.py test
+docker compose exec web python manage.py test
 ```
 
 ### ВС покрытием кода
