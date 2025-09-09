@@ -120,12 +120,6 @@ Admin panel: http://localhost/admin/
 
 CSRF_TRUSTED_ORIGINS=http://localhost
 
-## Development
-Create superuser
-```bash
-docker-compose exec web python manage.py createsuperuser
-```
-
 ### Start application
 ```bash
 docker-compose up --build
@@ -134,6 +128,11 @@ docker-compose up --build
 ### Database migrations
 ```bash
 docker-compose exec web python manage.py migrate
+```
+
+### Компиляция сообщений
+```bash
+docker compose exec web python manage.py compilemessages
 ```
 
 ### Create administrator
