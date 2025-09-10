@@ -130,6 +130,11 @@ docker-compose up --build
 docker-compose exec web python manage.py migrate
 ```
 
+### Create groups and permissions
+```bash
+docker-compose exec web python manage.py create_groups
+```
+
 ### Компиляция сообщений
 ```bash
 docker compose exec web python manage.py compilemessages

@@ -123,17 +123,20 @@ docker compose up --build
 docker compose exec web python manage.py migrate
 ```
 
+### Создать группы пользователей и права доступа
+```bash
+docker-compose exec web python manage.py create_groups
+```
+
 ### Компиляция сообщений
 ```bash
 docker compose exec web python manage.py compilemessages
 ```
 
-
 ### Создание администратора
 ```bash
 docker compose exec web python manage.py createsuperuser
 ```
-
 
 ### Сбор статических файлов
 ```bash
